@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>C.15. Extension Interactions</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Vulkan 1.0.18 + WSI Extensions - A Specification" /><link rel="up" href="apc.html" title="Appendix C. Layers &amp; Extensions" /><link rel="prev" href="apcs14.html" title="C.14. Accessing Extension Functions from Programs" /><link rel="next" href="apcs16.html" title="C.16. VK_KHR_sampler_mirror_clamp_to_edge" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apcs14.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apcs16.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="extensions-interactions"></a>C.15. Extension Interactions</h2></div></div></div><p>Extensions modifying the behavior of existing commands <span class="normative">should</span> provide
+additional parameters by using the <em class="parameter"><code>pNext</code></em> field of an existing
+structure, pointing to a new structure defined by the extension, as
+described in the <a class="link" href="ch02s06.html#fundamentals-validusage" title="2.6.1. Valid Usage">Valid Usage</a> section. Extension
+structures defined by multiple extensions affecting the same structure can
+be chained together in this fashion. Any structure which <span class="normative">can</span> be chained
+in this fashion <span class="normative">must</span> begin with the following two members:</p><p><strong> </strong>
+</p><pre class="programlisting">VkStructureType        sType;
+const void*            pNext;</pre><p>
+</p><p>It is in principle possible for extensions to provide additional parameters
+through alternate means, such as passing a handle parameter to a structure
+with a <em class="parameter"><code>sType</code></em> defined by the extension, but this approach is
+discouraged and <span class="normative">should not</span> be used.</p><p>When chaining multiple extensions to a structure, the implementation will
+process the chain starting with the base parameter and proceeding through
+each successive chained structure in turn. Extensions <span class="normative">should</span> be defined to
+accept any order of chaining, and <span class="normative">must</span> define their interactions with other
+extensions such that the results are deterministic. If an extension needs a
+specific ordering of its extension structure with respect to other
+extensions in a chain to provide deterministic results, it <span class="normative">must</span> define the
+required ordering and expected behavior as part of its specification.</p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apcs14.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apc.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apcs16.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

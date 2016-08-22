@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>C.4. Extension Command, Type, and Token Naming Conventions</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Vulkan 1.0.18 + WSI Extensions - A Specification" /><link rel="up" href="apc.html" title="Appendix C. Layers &amp; Extensions" /><link rel="prev" href="apcs03.html" title="C.3. Extension and Layer Naming Conventions" /><link rel="next" href="apcs05.html" title="C.5. The Vulkan Registry" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apcs03.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apcs05.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="extensions-naming"></a>C.4. Extension Command, Type, and Token Naming Conventions</h2></div></div></div><p>Extensions <span class="normative">may</span> add new commands, types, and tokens, or collectively
+“objects”, to the Vulkan API. These objects are given globally unique
+names by appending the author prefix defined above for the extension name
+according to the following templates.</p><p>A command or type name simply appends the author prefix. For example, a
+Khronos-blessed extension could expose the following command:</p><p><strong> </strong>
+</p><pre class="programlisting">void vkDoSomethingKHR(void);</pre><p>
+</p><p>A Google extension could expose the following command:</p><p><strong> </strong>
+</p><pre class="programlisting">void vkDoSomethingGOOGLE(void);</pre><p>
+</p><p>And a multi-author extension could expose the following type:</p><p><strong> </strong>
+</p><pre class="programlisting">typedef struct VkSomeDataEXT;</pre><p>
+</p><p>Enumeration or constant token names are constructed by following the token
+name with <code class="literal">_</code> and the author prefix, so a non-Khronos extension could expose
+this enumeration:</p><p><strong> </strong>
+</p><pre class="programlisting">enum VkSomeValuesGRPHX {
+    VK_SOME_VALUE_0_GRPHX = 0,
+    VK_SOME_VALUE_1_GRPHX = 1,
+    VK_SOME_VALUE_2_GRPHX = 2,
+};</pre><p>
+</p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apcs03.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apc.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apcs05.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

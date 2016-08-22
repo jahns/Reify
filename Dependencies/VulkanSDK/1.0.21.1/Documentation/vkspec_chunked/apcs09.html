@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>C.9. Documenting Extensions</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Vulkan 1.0.18 + WSI Extensions - A Specification" /><link rel="up" href="apc.html" title="Appendix C. Layers &amp; Extensions" /><link rel="prev" href="apcs08.html" title="C.8. Registering Extensions and Layers" /><link rel="next" href="apcs10.html" title="C.10. Assigning Extension Token Values" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apcs08.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apcs10.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_documenting_extensions"></a>C.9. Documenting Extensions</h2></div></div></div><p>Extensions are documented as modifications to the Vulkan specification.
+These modifications will be on Git branches that are named with the
+following syntax: <code class="literal">&lt;major.minor core spec version&gt;-&lt;extension_name&gt;</code></p><p>For example, the VK_KHR_surface extension will be documented relative
+to version 1.0 of the Vulkan specification. As such, the branch name will
+be: <code class="literal">1.0-VK_KHR_surface</code></p><p>If the extension modifies an existing section of the Vulkan
+specification, those modifications are made in-place. Since the changes are
+on a branch, the core-only specification <span class="normative">can</span> be easily produced. A
+specification with an extension is created by merging in the extension’s
+branch contents.</p><p>Extensions <span class="normative">should</span> be merged according to their registered extension number.
+If two extensions both modify the same portion of the specification, the
+higher-numbered extension <span class="normative">should</span> take care to deal with any conflicts.</p><p>The WSI extensions were used to help pioneer what <span class="normative">should</span> be done for
+extensions. This includes the following:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+All extensions <span class="normative">should</span> add to the appendix of the Vulkan
+    specification. This <span class="normative">should</span> be modeled after what was done for the
+    <code class="literal">VK_KHR_surface</code> extension, which contains some high-level information
+    about the extension (as well as code examples, and revision history) in
+    the <code class="literal">appendices/vk_khr_surface.txt</code> file.
+</li><li class="listitem">
+Each extension’s appendix file is included by adding an <code class="literal">include</code>
+    statement to the <code class="literal">vkspec.txt</code> file. Since most extensions will all put
+    their <code class="literal">include</code> line at the same place in this file, they <span class="normative">should</span> add
+    this statement on the master branch, even though the file won’t actually
+    exist on the master branch. This will avoid merge conflicts when
+    multiple extensions' branches are merged in order to create the “full”
+    branch specification.
+</li><li class="listitem">
+If there are any other places where 2 or more extensions will extend the
+    Vulkan specification, it is best to put that content in a file, and
+    use an <code class="literal">include</code> statement to put that content into the spec. Again,
+    this <code class="literal">include</code> line <span class="normative">should</span> be put on the master branch in order to
+    avoid merge conflicts.
+</li><li class="listitem">
+If an extension is more of an addition to the Vulkan specification,
+    the extension <span class="normative">should</span> add a chapter to the Vulkan specification.
+</li></ul></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apcs08.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apc.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apcs10.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

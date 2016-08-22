@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>C.6. Registering an Author Prefix with Khronos</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Vulkan 1.0.18 + WSI Extensions - A Specification" /><link rel="up" href="apc.html" title="Appendix C. Layers &amp; Extensions" /><link rel="prev" href="apcs05.html" title="C.5. The Vulkan Registry" /><link rel="next" href="apcs07.html" title="C.7. Registering a Vendor ID with Khronos" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apcs05.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apcs07.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="extensions-author-prefix"></a>C.6. Registering an Author Prefix with Khronos</h2></div></div></div><p>Previous Khronos APIs could only officially be modified by Khronos members.
+In an effort to build a more flexible platform, Vulkan allows non-Khronos
+developers to extend and modify the API via layers and extensions in the
+same manner as Khronos members. However, extensions <span class="normative">must</span> still be
+registered with Khronos. A mechanism for non-members to register layers and
+extensions is provided.</p><p>Extension authors will be able to create an account on the Khronos github
+project and, using this account, register an author prefix with
+Khronos. This string <span class="normative">must</span> be used as the author prefix in any extensions
+the author registers. The same account will be used to request registration
+of extensions or layers with Khronos, as described below.</p><p>To reserve an author prefix, propose a merge request against
+<a class="link" href="apcs05.html" title="C.5. The Vulkan Registry"><code class="literal">vk.xml</code></a>. The merge <span class="normative">must</span> add a <code class="literal">&lt;tag&gt;</code> XML tag
+and fill in the <code class="literal">name</code>, <code class="literal">author</code> and <code class="literal">contact</code> attributes with the requested
+author prefix, the author’s formal name (e.g. company or project name), and
+contact email address, respectively. The author prefix will be reserved only
+once this merge request is accepted.</p><p>Please do not try to reserve author names which clearly belong to another
+existing company or software project which <span class="normative">may</span> wish to develop Vulkan
+extensions or layers in the future, as a matter of courtesy and respect.
+Khronos <span class="normative">may</span> decline to register author names that are not requested in good
+faith.</p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apcs05.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apc.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apcs07.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

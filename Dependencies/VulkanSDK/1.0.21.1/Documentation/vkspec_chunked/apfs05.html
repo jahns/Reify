@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>F.5. VK_KHR_display_swapchain</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vulkan 1.0.21 + WSI Extensions - A Specification" /><link rel="up" href="apf.html" title="Appendix F. Window System Integration (WSI) Extensions" /><link rel="prev" href="apfs04.html" title="F.4. VK_KHR_display" /><link rel="next" href="apfs06.html" title="F.6. VK_KHR_android_surface" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apfs04.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apfs06.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_vk_khr_display_swapchain"></a>F.5. VK_KHR_display_swapchain</h2></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<span class="strong"><strong>Name String</strong></span>
+</span></dt><dd>
+VK_KHR_display_swapchain
+</dd><dt><span class="term">
+<span class="strong"><strong>Extension Type</strong></span>
+</span></dt><dd>
+Device extension
+</dd><dt><span class="term">
+<span class="strong"><strong>Registered Extension Number</strong></span>
+</span></dt><dd>
+4
+</dd><dt><span class="term">
+<span class="strong"><strong>Status</strong></span>
+</span></dt><dd>
+Draft.
+</dd><dt><span class="term">
+<span class="strong"><strong>Last Modified Date</strong></span>
+</span></dt><dd>
+11/10/2015
+</dd><dt><span class="term">
+<span class="strong"><strong>Revision</strong></span>
+</span></dt><dd>
+9
+</dd><dt><span class="term">
+<span class="strong"><strong>IP Status</strong></span>
+</span></dt><dd>
+No known IP claims.
+</dd><dt><span class="term">
+<span class="strong"><strong>Dependencies</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+This extension is written against revision 1.0 of the Vulkan API.
+</li><li class="listitem">
+This extension requires VK_KHR_swapchain and VK_KHR_display
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contributors</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+James Jones, NVIDIA
+</li><li class="listitem">
+Jeff Vigil, Qualcomm
+</li><li class="listitem">
+Jesse Hall, Google
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contacts</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+James Jones (jajones <span class="emphasis"><em>at</em></span> nvidia.com)
+</li></ul></div></dd></dl></div><p>This extension provides an API to create a swapchain directly on a
+device’s display without any underlying window system.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_object_types_4"></a>F.5.1. New Object Types</h3></div></div></div><p>None</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enum_constants_5"></a>F.5.2. New Enum Constants</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Extending <code class="code">VkStructureType</code>:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR</code>
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Extending <code class="code">VkResult</code>:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VK_ERROR_INCOMPATIBLE_DISPLAY_KHR</code>
+</li></ul></div></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enums_4"></a>F.5.3. New Enums</h3></div></div></div><p>None</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_structures_4"></a>F.5.4. New Structures</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#VkDisplayPresentInfoKHR">VkDisplayPresentInfoKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_functions_4"></a>F.5.5. New Functions</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#vkCreateSharedSwapchainsKHR">vkCreateSharedSwapchainsKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_issues_4"></a>F.5.6. Issues</h3></div></div></div><p>1)  Should swapchains sharing images each hold a reference to the images,
+    or should it be up to the application to destroy the swapchains and
+    images in an order that avoids the need for reference counting?</p><pre class="literallayout">PROPOSED RESOLUTION: Take a reference.  The lifetime of presentable
+images is already complex enough.</pre><p>2)  Should the srcRect/dstRect parameters be specified as part of the
+    present command, or at swapchain creation time?</p><pre class="literallayout">PROPOSED RESOLUTION: As part of the presentation command.  This allows
+moving and scaling the image on the screen without the need to
+respecify the mode or create a new swapchain presentable images.</pre><p>3)  Should srcRect/dstRect be specified as rects, or separate offset/extent
+    values?</p><pre class="literallayout">PROPOSED RESOLUTION: As rects.  Specifying them separately might make
+it easier for hardware to expose support for one but not the other, but
+in such cases applications must just take care to obey the reported
+capabilities and not use non-zero offsets or extents that require
+scaling, as appropriate.</pre><p>4)  How can applications create multiple swapchains that use the same
+    images?</p><pre class="literallayout">RESOLUTION: By calling vkCreateSharedSwapchainsKHR().</pre><pre class="literallayout">An earlier resolution used vkCreateSwapchainKHR(), chaining multiple
+VkSwapchainCreateInfoKHR structures through pNext.  In order to allow each
+swapchain to also allow other extension structs, a level of indirection
+was used: VkSwapchainCreateInfoKHR::pNext pointed to a different structure,
+which had both an sType/pNext for additional extensions, and also had a
+pointer to the next VkSwapchainCreateInfoKHR structure.  The number of
+swapchains to be created could only be found by walking this linked list
+of alternating structures, and the pSwapchains out parameter was
+reinterpreted to be an array of VkSwapchainKHR handles.</pre><pre class="literallayout">Another option considered was a method to specify a "shared"
+swapchain when creating a new swapchain, such that groups of swapchains
+using the same images could be built up one at a time.  This was deemed
+unusable because drivers need to know all of the displays an image
+will be used on when determining which internal formats and layouts to
+use for that image.</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_examples_4"></a>F.5.7. Examples</h3></div></div></div><p><span class="strong"><strong>Example 1</strong></span></p><p>Create a swapchain on a display mode and plane</p><pre class="programlisting">    // See VK_KHR_display for an example of how to pick a display,
+    // display mode, plane, and how to create a VkSurfaceKHR for
+    // that plane.
+    extern VkPhysicalDevice physDevice;
+    extern VkDisplayModePropertiesKHR myModeProps;
+    extern VkSurfaceKHR mySurface;
+    extern VkDevice device;
+
+    uint32_t queueCount, i;
+    uint32_t presentQueueFamilyIndex = UINT32_MAX;
+    VkBool32 supportsPresent;
+
+    // Find a queue family that supports presenting to this surface
+    uint32_t familyCount;
+    vkGetPhysicalDeviceQueueFamilyProperties(physDevice, &amp;familyCount, NULL);
+
+    for (i = 0; i &lt; familyCount; ++i)
+    {
+        vkGetPhysicalDeviceSurfaceSupportKHR(physDevice, i, mySurface, &amp;supportsPresent);
+
+        if (supportsPresent) {
+            // Found a queue family that supports present.  See
+            // VK_KHR_surface for an example of how to find a queue that
+            // supports both presentation and graphics
+            presentQueueFamilyIndex = i;
+            break;
+        }
+    }
+
+    // Figure out which formats and present modes this surface supports.
+    uint32_t formatCount;
+    vkGetPhysicalDeviceSurfaceFormatsKHR(physDevice, mySurface, &amp;formatCount, NULL);
+
+    VkSurfaceFormatKHR* formats = (VkSurfaceFormatKHR*)malloc(sizeof(VkSurfaceFormatKHR) * formatCount);
+    vkGetPhysicalDeviceSurfaceFormatsKHR(physDevice, mySurface, &amp;formatCount, formats);
+
+    const VkSwapchainCreateInfoKHR createInfo =
+    {
+        VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,    // sType
+        NULL,                                           // pNext
+        0,                                              // flags
+        mySurface,                                      // surface
+        3,                                              // minImageCount
+        formats[0].format,                              // imageFormat
+        formats[0].colorSpace,                          // imageColorSpace
+        myModeProps.parameters.visibleRegion,           // imageExtent
+        1,                                              // imageArrayLayers
+        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,            // imageUsage
+        VK_SHARING_MODE_EXCLUSIVE,                      // imageSharingMode
+        0,                                              // queueFamilyIndexCount
+        NULL,                                           // pQueueFamilyIndices
+        VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,          // preTransform
+        VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,              // compositeAlpha
+        VK_PRESENT_MODE_FIFO_KHR,                       // presentMode
+        VK_TRUE,                                        // clipped
+        VK_NULL_HANDLE                                  // oldSwapchain
+    };
+
+    VkSwapchainKHR swapchain;
+    // This is equivalent to vkCreateSwapchainKHR.
+    vkCreateSharedSwapchainsKHR(device, 1, &amp;createInfo, NULL, &amp;swapchain);</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_version_history_5"></a>F.5.8. Version History</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Revision 1, 2015-07-29 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Initial draft
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 2, 2015-08-21 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Renamed this extension and all of its enumerations, types, functions,
+     etc.  This makes it compliant with the proposed standard for Vulkan
+     extensions.
+</li><li class="listitem">
+Switched from "revision" to "version", including use of the
+     VK_MAKE_VERSION macro in the header file.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 3, 2015-09-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Restore single-field revision number.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 4, 2015-09-08 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Allow creating multiple swap chains that share the same images
+     using a single call to vkCreateSwapChainKHR().
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 5, 2015-09-10 (Alon Or-bach)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Removed underscores from SWAP_CHAIN in two enums.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 6, 2015-10-02 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added support for smart panels/buffered displays.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 7, 2015-10-26 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Renamed from VK_EXT_KHR_display_swapchain to VK_KHR_display_swapchain.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 8, 2015-11-03 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Updated sample code based on the changes to VK_KHR_swapchain.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 9, 2015-11-10 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Replaced VkDisplaySwapchainCreateInfoKHR with vkCreateSharedSwapchainsKHR,
+     changing resolution of issue #4.
+</li></ul></div></li></ul></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apfs04.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apf.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apfs06.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

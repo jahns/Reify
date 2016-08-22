@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>3.1. Command Function Pointers</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vulkan 1.0.21 + WSI Extensions - A Specification" /><link rel="up" href="ch03.html" title="Chapter 3. Initialization" /><link rel="prev" href="ch03.html" title="Chapter 3. Initialization" /><link rel="next" href="ch03s02.html" title="3.2. Instances" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="ch03.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch03s02.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="initialization-functionpointers"></a>3.1. Command Function Pointers</h2></div></div></div><p>Vulkan commands are not necessarily exposed statically on a platform.
+Function pointers for all Vulkan commands <span class="normative">can</span> be obtained with the
+command:</p><p><a id="vkGetInstanceProcAddr"></a><strong> </strong>
+</p><pre class="programlisting">PFN_vkVoidFunction vkGetInstanceProcAddr(
+    VkInstance                                  instance,
+    const char*                                 pName);</pre><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<em class="parameter"><code>instance</code></em> is the instance that the function pointer will be
+    compatible with.
+</li><li class="listitem">
+<em class="parameter"><code>pName</code></em> is the name of the command to obtain.
+</li></ul></div><p><span class="strong"><strong><code class="code">vkGetInstanceProcAddr</code></strong></span> itself is obtained in a platform- and loader-
+specific manner. Typically, the loader library will export this command as a
+function symbol, so applications <span class="normative">can</span> link against the loader library, or
+load it dynamically and look up the symbol using platform-specific APIs.
+Loaders are encouraged to export function symbols for all other core
+Vulkan commands as well; if this is done, then applications that use only
+the core Vulkan commands have no need to use <span class="strong"><strong><code class="code">vkGetInstanceProcAddr</code></strong></span>.</p><p>Function pointers to commands that do not operate on a specific instance <span class="normative">can</span>
+be obtained by using this command with <em class="parameter"><code>instance</code></em> equal to <code class="literal">NULL</code>. The
+following commands <span class="normative">can</span> be accessed this way:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch30s02.html#vkEnumerateInstanceExtensionProperties">vkEnumerateInstanceExtensionProperties</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch30s01.html#vkEnumerateInstanceLayerProperties">vkEnumerateInstanceLayerProperties</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch03s02.html#vkCreateInstance">vkCreateInstance</a></code>
+</li></ul></div><p>The returned function pointer is of type <code class="code"><a class="link" href="ch03s01.html#PFN_vkVoidFunction">PFN_vkVoidFunction</a></code>, and must
+be cast to the type of the command being queried.</p><p>If <em class="parameter"><code>instance</code></em> is a valid <code class="code">VkInstance</code>, function pointers to any
+commands that operate on <em class="parameter"><code>instance</code></em> or a child of <em class="parameter"><code>instance</code></em> <span class="normative">can</span> be
+obtained. The returned function pointer <span class="normative">must</span> only be called with a
+dispatchable object (the first parameter) that is a child of <em class="parameter"><code>instance</code></em>.</p><p>If <em class="parameter"><code>pName</code></em> is not the name of a core Vulkan command, or is an
+extension command for any extension not supported by any available layer or
+implementation, then <span class="strong"><strong><code class="code">vkGetInstanceProcAddr</code></strong></span> will return <code class="literal">NULL</code>.</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note: editing-note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left">editing-note</th></tr><tr><td align="left" valign="top"><p>(Jon, Bug 14886 / Gitlab issue 4) The WSI group tentatively agreed that the
+WSI extensions were special, and should get static entry points in link
+libraries and prototypes in <code class="literal">vulkan.h</code>, while future extensions would have
+to be dynamically loaded. If this decision is upheld by the group as a
+whole, it would probably be encoded in the previous paragraph, in the WSI
+extensions branch of the Specification.</p><p>However, this decision has not been fully signed off on by the entire Vulkan
+WG yet AFAIK. Note that implementations typically will not support many of the
+WSI extensions, so “static entry points” do not relieve apps of the
+neccessity of runtime enabling and testing of each extension before using
+it.</p></td></tr></table></div><div class="sidebar"><div class="titlepage"><div><div><p class="title"><strong>Valid Usage</strong></p></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+If <em class="parameter"><code>instance</code></em> is not <code class="literal">NULL</code>, <em class="parameter"><code>instance</code></em> <span class="normative">must</span> be a valid <code class="code">VkInstance</code> handle
+</li><li class="listitem">
+<em class="parameter"><code>pName</code></em> <span class="normative">must</span> be a null-terminated string
+</li><li class="listitem">
+If <em class="parameter"><code>instance</code></em> is <code class="literal">NULL</code>, <em class="parameter"><code>pName</code></em> <span class="normative">must</span> be "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", or "vkCreateInstance"
+</li><li class="listitem">
+If <em class="parameter"><code>instance</code></em> is not <code class="literal">NULL</code>, <em class="parameter"><code>pName</code></em> <span class="normative">must not</span> be "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", or "vkCreateInstance"
+</li></ul></div></div><p>In order to support systems with multiple Vulkan implementations
+comprising heterogeneous collections of hardware and software, the function
+pointers returned by <span class="strong"><strong><code class="code">vkGetInstanceProcAddr</code></strong></span> <span class="normative">may</span> point to dispatch
+code, which calls a different real implementation for different
+<code class="code">VkDevice</code> objects (and objects created from them). The overhead of this
+internal dispatch <span class="normative">can</span> be avoided by obtaining device-specific function
+pointers for any commands that use a device or device-child object as their
+dispatchable object. Such function pointers <span class="normative">can</span> be obtained with the
+command:</p><p><a id="vkGetDeviceProcAddr"></a><strong> </strong>
+</p><pre class="programlisting">PFN_vkVoidFunction vkGetDeviceProcAddr(
+    VkDevice                                    device,
+    const char*                                 pName);</pre><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<em class="parameter"><code>device</code></em> is the logical device that provides the function pointer.
+</li><li class="listitem"><p class="simpara">
+<em class="parameter"><code>pName</code></em> is the name of any Vulkan command whose first parameter
+    is one of
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VkDevice</code>
+</li><li class="listitem">
+<code class="code">VkQueue</code>
+</li><li class="listitem">
+<code class="code">VkCommandBuffer</code>
+</li></ul></div></li></ul></div><p>The returned function pointer is of type <code class="code"><a class="link" href="ch03s01.html#PFN_vkVoidFunction">PFN_vkVoidFunction</a></code>, and must
+be cast to the type of the command being queried.</p><p>If <em class="parameter"><code>pName</code></em> is not the name of one of these Vulkan commands, and is
+not the name of an extension command belonging to an extension enabled for
+<em class="parameter"><code>device</code></em>, then <span class="strong"><strong><code class="code">vkGetDeviceProcAddr</code></strong></span> will return <code class="literal">NULL</code>.</p><div class="sidebar"><div class="titlepage"><div><div><p class="title"><strong>Valid Usage</strong></p></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<em class="parameter"><code>device</code></em> <span class="normative">must</span> be a valid <code class="code">VkDevice</code> handle
+</li><li class="listitem">
+<em class="parameter"><code>pName</code></em> <span class="normative">must</span> be a null-terminated string
+</li></ul></div></div><p>The function pointer type returned from the <code class="code"><a class="link" href="ch03s01.html#vkGetInstanceProcAddr">vkGetInstanceProcAddr</a></code> and
+<code class="code"><a class="link" href="ch03s01.html#vkGetDeviceProcAddr">vkGetDeviceProcAddr</a></code> is a dummy type not corresponding to any actual
+Vulkan function:</p><p><a id="PFN_vkVoidFunction"></a><strong> </strong>
+</p><pre class="programlisting">typedef void (VKAPI_PTR *PFN_vkVoidFunction)(void);</pre><p>
+</p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s02.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>C.7. Registering a Vendor ID with Khronos</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Vulkan 1.0.18 + WSI Extensions - A Specification" /><link rel="up" href="apc.html" title="Appendix C. Layers &amp; Extensions" /><link rel="prev" href="apcs06.html" title="C.6. Registering an Author Prefix with Khronos" /><link rel="next" href="apcs08.html" title="C.8. Registering Extensions and Layers" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apcs06.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apcs08.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="extensions-vendor-id"></a>C.7. Registering a Vendor ID with Khronos</h2></div></div></div><p>Vulkan implementers must report a valid vendor ID for their
+implementation, as reported by
+<a class="link" href="ch04s01.html" title="4.1. Physical Devices">physical device queries</a>. If
+there is no valid PCI vendor ID defined for the physical device,
+implementations <span class="normative">must</span> obtain a Khronos vendor ID.</p><p>Khronos vendor IDs are reserved in a similar fashion to
+<a class="link" href="apcs06.html" title="C.6. Registering an Author Prefix with Khronos">author prefixes</a>. While vendor IDs are not
+directly related to API extensions, the reservation process is very similar
+and so is described in this section.</p><p>To reserve an Khronos vendor ID, you must first have a Khronos author
+prefix. Propose a merge request against
+<a class="link" href="apcs05.html" title="C.5. The Vulkan Registry"><code class="literal">vk.xml</code></a>. The merge <span class="normative">must</span> add a <code class="literal">&lt;vendorid&gt;</code> tag
+and fill in the <code class="literal">name</code> and <code class="literal">id</code> attributes. The <code class="literal">name</code> attribute <span class="normative">must</span> be
+set to the author prefix. The <code class="literal">id</code> attribute <span class="normative">must</span> be the first sequentially
+available ID in the list of <code class="literal">&lt;vendorid&gt;</code> tags. The vendor ID will be
+reserved only once this merge request has been accepted.</p><p>Please do not try to reserve vendor IDs unless you are making a good faith
+effort to develop a Vulkan implementation and require one for that
+purpose.</p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apcs06.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apc.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apcs08.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

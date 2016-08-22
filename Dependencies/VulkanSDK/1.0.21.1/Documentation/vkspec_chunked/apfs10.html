@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>F.10. VK_KHR_xcb_surface</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vulkan 1.0.21 + WSI Extensions - A Specification" /><link rel="up" href="apf.html" title="Appendix F. Window System Integration (WSI) Extensions" /><link rel="prev" href="apfs09.html" title="F.9. VK_KHR_win32_surface" /><link rel="next" href="apfs11.html" title="F.11. VK_KHR_xlib_surface" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apfs09.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apfs11.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_vk_khr_xcb_surface"></a>F.10. VK_KHR_xcb_surface</h2></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<span class="strong"><strong>Name String</strong></span>
+</span></dt><dd>
+VK_KHR_xcb_surface
+</dd><dt><span class="term">
+<span class="strong"><strong>Extension Type</strong></span>
+</span></dt><dd>
+Instance extension
+</dd><dt><span class="term">
+<span class="strong"><strong>Registered Extension Number</strong></span>
+</span></dt><dd>
+6
+</dd><dt><span class="term">
+<span class="strong"><strong>Last Modified Date</strong></span>
+</span></dt><dd>
+11/28/2015
+</dd><dt><span class="term">
+<span class="strong"><strong>Revision</strong></span>
+</span></dt><dd>
+6
+</dd><dt><span class="term">
+<span class="strong"><strong>IP Status</strong></span>
+</span></dt><dd>
+No known IP claims.
+</dd><dt><span class="term">
+<span class="strong"><strong>Dependencies</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+This extension is written against revision 1.0 of the Vulkan API.
+</li><li class="listitem">
+This extension requires VK_KHR_surface.
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contributors</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+Patrick Doane, Blizzard
+</li><li class="listitem">
+Jason Ekstrand, Intel
+</li><li class="listitem">
+Ian Elliott, LunarG
+</li><li class="listitem">
+Courtney Goeltzenleuchter, LunarG
+</li><li class="listitem">
+Jesse Hall, Google
+</li><li class="listitem">
+James Jones, NVIDIA
+</li><li class="listitem">
+Antoine Labour, Google
+</li><li class="listitem">
+Jon Leech, Khronos
+</li><li class="listitem">
+David Mao, AMD
+</li><li class="listitem">
+Norbert Nopper, Freescale
+</li><li class="listitem">
+Alon Or-bach, Samsung
+</li><li class="listitem">
+Daniel Rakos, AMD
+</li><li class="listitem">
+Graham Sellers, AMD
+</li><li class="listitem">
+Ray Smith, ARM
+</li><li class="listitem">
+Jeff Vigil, Qualcomm
+</li><li class="listitem">
+Chia-I Wu, LunarG
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contacts</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+Jesse Hall, Google
+</li><li class="listitem">
+Ian Elliott, LunarG
+</li></ul></div></dd></dl></div><p>The VK_KHR_xcb_surface extension is an instance extension.  It provides a
+mechanism to create a <code class="code">VkSurfaceKHR</code> object (defined by the
+VK_KHR_surface extension) that refers to an X11 window, using the XCB
+client-side library, as well as a query
+to determine support for rendering via XCB.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_object_types_9"></a>F.10.1. New Object Types</h3></div></div></div><p>None</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enum_constants_10"></a>F.10.2. New Enum Constants</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Extending <code class="code">VkStructureType</code>:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR</code>
+</li></ul></div></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enums_9"></a>F.10.3. New Enums</h3></div></div></div><p>None</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_structures_9"></a>F.10.4. New Structures</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s02.html#VkXcbSurfaceCreateInfoKHR">VkXcbSurfaceCreateInfoKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_functions_9"></a>F.10.5. New Functions</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s02.html#vkCreateXcbSurfaceKHR">vkCreateXcbSurfaceKHR</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch29s04.html#vkGetPhysicalDeviceXcbPresentationSupportKHR">vkGetPhysicalDeviceXcbPresentationSupportKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_issues_9"></a>F.10.6. Issues</h3></div></div></div><p>1) Does XCB need a way to query for compatibility between a particular
+   physical device and a specific screen?  This would be a more general query
+   than vkGetPhysicalDeviceSurfaceSupportKHR: If it returned true, then the
+   physical device could be assumed to support presentation to any window on
+   that screen.</p><pre class="literallayout">RESOLVED: Yes, this is needed for toolkits that want to create a VkDevice
+before creating a window.  To ensure the query is reliable, it must be
+made against a particular X visual rather than the screen in general.</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_version_history_10"></a>F.10.7. Version History</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Revision 1, 2015-09-23 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Initial draft, based on the previous contents of VK_EXT_KHR_swapchain
+     (later renamed VK_EXT_KHR_surface).
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 2, 2015-10-02 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added presention support query for an (xcb_connection_t*,
+     xcb_visualid_t) pair.
+</li><li class="listitem">
+Removed "root" parameter from CreateXcbSurfaceKHR(), as it is
+     redundant when a window on the same screen is specified as well.
+</li><li class="listitem">
+Adjusted wording of issue #1 and added agreed upon resolution.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 3, 2015-10-14 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Removed "root" parameter from CreateXcbSurfaceKHR() in one more place.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 4, 2015-10-26 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Renamed from VK_EXT_KHR_xcb_surface to VK_KHR_xcb_surface.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 5, 2015-10-23 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added allocation callbacks to vkCreateXcbSurfaceKHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 6, 2015-11-28 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Updated the surface create function to take a pCreateInfo structure.
+</li></ul></div></li></ul></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apfs09.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apf.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apfs11.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

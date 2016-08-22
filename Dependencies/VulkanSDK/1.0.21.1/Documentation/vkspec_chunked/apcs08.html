@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>C.8. Registering Extensions and Layers</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Vulkan 1.0.18 + WSI Extensions - A Specification" /><link rel="up" href="apc.html" title="Appendix C. Layers &amp; Extensions" /><link rel="prev" href="apcs07.html" title="C.7. Registering a Vendor ID with Khronos" /><link rel="next" href="apcs09.html" title="C.9. Documenting Extensions" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apcs07.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apcs09.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_registering_extensions_and_layers"></a>C.8. Registering Extensions and Layers</h2></div></div></div><p>Extensions <span class="normative">must</span> be registered with Khronos. Layers <span class="normative">may</span> be registered, and
+registration is strongly recommended. Registration means:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+Receiving an extension number.
+</li><li class="listitem">
+Adding the extension or layer name to the list in <code class="literal">vk.xml</code> and appearing
+    on the Khronos registry website, which will link to associated
+    documentation hosted on Khronos.
+</li><li class="listitem">
+For extensions which add to the Vulkan API, including definitions of
+    those additions to <code class="literal">vk.xml</code>.
+</li></ul></div><p>Registration for Khronos members is handled by filing a merge request in the
+internal gitlab repository against the branch containing the core
+specification against which the extension or layer will be written. The
+merge <span class="normative">must</span> modify <code class="literal">vk.xml</code> to define extension names, API interfaces, and
+related information. Registration is not complete until the registry
+maintainer has validated and accepted the merge.</p><p>Since this process could in principle be completely automated, this
+suggests a scalable mechanism for accepting registration of non-Khronos
+extensions. Non-Khronos members who want to create extensions <span class="normative">must</span> register
+with Khronos by creating a github account, and registering their author
+prefix and/or FQDNs to that account. They <span class="normative">can</span> then submit new extension
+registration requests by proposing merges to <code class="literal">vk.xml</code>. On acceptance of the
+merge, the extension will be registered, though its specification need not
+be checked into the Khronos github repository at that point.</p><p>The registration process <span class="normative">can</span> be split into several steps to accommodate
+extension number assignment prior to extension publication:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+Acquire an extension number. This is done by proposing a merge request
+    against <code class="literal">vk.xml</code> similarly to how <a class="link" href="apcs06.html" title="C.6. Registering an Author Prefix with Khronos">author     prefixes are reserved</a>. The merge <span class="normative">should</span> add a new <code class="literal">&lt;extension&gt;</code> tag
+    at the end of the file with attributes specifying the proposed extension
+    <code class="literal">name</code>, the next unused sequential extension <code class="literal">number</code>, the <code class="literal">author</code> and
+    <code class="literal">contact</code> information (if different than that already specified for the
+    author prefix used in the extension name), and finally, specifying
+    <code class="literal">supported="disabled"</code>. The extension number will be reserved only once
+    this merge request is accepted into the master branch.
+</li><li class="listitem">
+Develop and test the extension using the registered extension number.
+</li><li class="listitem">
+Publish the extension to Khronos using the previously registered
+    extension number, by creating a branch of the repository with
+    appropriate changes relative to the core Vulkan API branch.
+</li><li class="listitem">
+Mark the extension as enabled, by proposing a merge to master changing
+    the <code class="literal">supported</code> attribute value of the <code class="literal">&lt;extension&gt;</code> to
+    <code class="literal">supported="vulkan"</code>. This <span class="normative">should</span> be completely automated and under the
+    control of the publishers, to allow them to align publication on Khronos
+    with product releases. However, complete automation might be difficult,
+    since steps such as regenerating and validating <code class="literal">vulkan.h</code> are involved.
+    Once the merge is accepted and the corresponding updated header with the
+    new extension interface is committed to the master branch, publication
+    is complete.
+</li></ul></div><p>The automated process does not exist yet, and would require significant
+investment in infrastructure to support the process on the Khronos servers.</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note: editing-note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left">editing-note</th></tr><tr><td align="left" valign="top"><p>TODO: This section is subject to change and not complete yet, but in broad
+is how we expect extension registration and specifications to work. The
+process will be refined as members and outside authors define further
+extensions.</p></td></tr></table></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apcs07.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apc.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apcs09.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

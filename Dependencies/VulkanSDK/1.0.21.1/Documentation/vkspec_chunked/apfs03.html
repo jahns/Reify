@@ -1,0 +1,1435 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>F.3. VK_KHR_swapchain</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vulkan 1.0.21 + WSI Extensions - A Specification" /><link rel="up" href="apf.html" title="Appendix F. Window System Integration (WSI) Extensions" /><link rel="prev" href="apfs02.html" title="F.2. VK_KHR_surface" /><link rel="next" href="apfs04.html" title="F.4. VK_KHR_display" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apfs02.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apfs04.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_vk_khr_swapchain"></a>F.3. VK_KHR_swapchain</h2></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<span class="strong"><strong>Name String</strong></span>
+</span></dt><dd>
+VK_KHR_swapchain
+</dd><dt><span class="term">
+<span class="strong"><strong>Extension Type</strong></span>
+</span></dt><dd>
+Device extension
+</dd><dt><span class="term">
+<span class="strong"><strong>Registered Extension Number</strong></span>
+</span></dt><dd>
+2
+</dd><dt><span class="term">
+<span class="strong"><strong>Last Modified Date</strong></span>
+</span></dt><dd>
+04/05/2016
+</dd><dt><span class="term">
+<span class="strong"><strong>Revision</strong></span>
+</span></dt><dd>
+68
+</dd><dt><span class="term">
+<span class="strong"><strong>IP Status</strong></span>
+</span></dt><dd>
+No known IP claims.
+</dd><dt><span class="term">
+<span class="strong"><strong>Dependencies</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+This extension is written against revision 1.0 of the Vulkan API.
+</li><li class="listitem">
+This extension requires VK_KHR_surface.
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contributors</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+Patrick Doane, Blizzard
+</li><li class="listitem">
+Ian Elliott, LunarG
+</li><li class="listitem">
+Jesse Hall, Google
+</li><li class="listitem">
+Mathias Heyer, NVIDIA
+</li><li class="listitem">
+James Jones, NVIDIA
+</li><li class="listitem">
+David Mao, AMD
+</li><li class="listitem">
+Norbert Nopper, Freescale
+</li><li class="listitem">
+Alon Or-bach, Samsung
+</li><li class="listitem">
+Daniel Rakos, AMD
+</li><li class="listitem">
+Graham Sellers, AMD
+</li><li class="listitem">
+Jeff Vigil, Qualcomm
+</li><li class="listitem">
+Chia-I Wu, LunarG
+</li><li class="listitem">
+Jason Ekstrand, Intel
+</li><li class="listitem">
+Matthaeus G. Chajdas, AMD
+</li><li class="listitem">
+Ray Smith, ARM
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contacts</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+James Jones, NVIDIA
+</li><li class="listitem">
+Ian Elliott, LunarG
+</li></ul></div></dd></dl></div><p>The VK_KHR_swapchain extension is the device-level companion to the
+VK_KHR_surface extension.  It introduces <code class="code">VkSwapchainKHR</code> objects,
+which provide the ability to present rendering results to a surface.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_object_types_2"></a>F.3.1. New Object Types</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code">VkSwapchainKHR</code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enum_constants_3"></a>F.3.2. New Enum Constants</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Extending <code class="code">VkStructureType</code>:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR</code>
+</li><li class="listitem">
+<code class="code">VK_STRUCTURE_TYPE_PRESENT_INFO_KHR</code>
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Extending <code class="code">VkImageLayout</code>:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VK_IMAGE_LAYOUT_PRESENT_SRC_KHR</code>
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Extending <code class="code">VkResult</code>:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VK_SUBOPTIMAL_KHR</code>
+</li><li class="listitem">
+<code class="code">VK_ERROR_OUT_OF_DATE_KHR</code>
+</li></ul></div></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enums_2"></a>F.3.3. New Enums</h3></div></div></div><p>None</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_structures_2"></a>F.3.4. New Structures</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#VkSwapchainCreateInfoKHR">VkSwapchainCreateInfoKHR</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#VkPresentInfoKHR">VkPresentInfoKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_functions_2"></a>F.3.5. New Functions</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#vkCreateSwapchainKHR">vkCreateSwapchainKHR</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#vkDestroySwapchainKHR">vkDestroySwapchainKHR</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#vkGetSwapchainImagesKHR">vkGetSwapchainImagesKHR</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#vkAcquireNextImageKHR">vkAcquireNextImageKHR</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch29s06.html#vkQueuePresentKHR">vkQueuePresentKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_issues_2"></a>F.3.6. Issues</h3></div></div></div><p>1)  Does this extension allow the application to specify the memory
+    backing of the presentable images?</p><pre class="literallayout">RESOLVED: No.  Unlike standard images, the implementation will
+allocate the memory backing of the presentable image.</pre><p>2)  What operations are allowed on presentable images?</p><pre class="literallayout">RESOLVED: This is determined by the imageUsageFlags specified
+when creating the presentable image's swapchain.</pre><p>3)  Does this extension support MSAA presentable images?</p><pre class="literallayout">RESOLVED: No.  Presentable images are always single-sampled.
+Multi-sampled rendering must use regular images.  To present the
+rendering results the application must manually resolve the multi-
+sampled image to a single-sampled presentable image prior to
+presentation.</pre><p>4)  Does this extension support stereo/multi-view presentable images?</p><pre class="literallayout">RESOLVED: Yes.  The number of views associated with a presentable
+image is determined by the imageArraySize specified when creating
+a swapchain.  All presentable images in a given swapchain use
+the same array size.</pre><p>5)  Are the layers of stereo presentable images half-sized?</p><pre class="literallayout">RESOLVED: No.  The image extents always match those requested
+by the applicaton.</pre><p>6)  Do the "present" and "acquire next image" commands operate on a
+    queue?  If not, do they need to include explicit semaphore
+    objects to interlock them with queue operations?</p><pre class="literallayout">RESOLVED: The present command operates on a queue.  The image
+ownership operation it represents happens in order with other
+operations on the queue, so no explicit semaphore object is
+required to synchronize its actions.  Applications may want to
+acquire the next image in separate threads from those in which
+they manage their queue, or in multiple threads.  To make such
+usage easier, the acquire next image command takes a semaphore
+to signal as a method of explicit synchronizatoin.  The
+application must later queue a wait for this semaphore before
+queuing execution of any commands using the image.</pre><p>7)  Does vkAcquireNextImageKHR() block if no images are available?</p><pre class="literallayout">RESOLVED: The command takes a timeout parameter.  Special values
+for the timeout are 0, which makes the call a non-blocking
+operation, and UINT64_MAX, which blocks indefinitely.  Values in
+between will block for up to the specified time.  The call will
+return when an image becomes available or an error occurs.  It
+may, but is not required to, return before the specified timeout
+expires if the swapchain becomes out of date.</pre><p>8)  Can multiple presents be queued using one QueuePresent call?</p><pre class="literallayout">RESOLVED: Yes.  VkPresentInfoKHR contains a list of swapchains
+and corresponding image indices that will be presented.  When
+supported, all presentations queued with a single vkQueuePresentKHR
+call will be applied atomically as one operation.  The same swapchain
+must not appear in the list more than once.  Later extensions may
+provide applications stronger guarantees of atomicity for such present
+operations, and/or allow them to query whether atomic presentation of a
+particular group of swapchains is possible.</pre><p>9)  How do the presentation and acquire next image functions notify
+    the application the targeted surface has changed?</p><pre class="literallayout">RESOLVED: Two new result codes are introduced for this purpose:</pre><pre class="literallayout">VK_SUBOPTIMAL_KHR - Presentation will still succeed, subject to the
+window resize behavior, but the swapchain is no longer configured
+optimally for the surface it targets.  Applications should query
+updated surface information and recreate their swapchain at the next
+convenient opportunity.</pre><pre class="literallayout">VK_ERROR_OUT_OF_DATE_KHR - Failure.  The swapchain is no longer
+compatible with the surface it targets.  The application must
+query updated surface information and recreate the swapchain
+before presentation will succeed.</pre><pre class="literallayout">These can be returned by both vkAcquireNextImageKHR and
+vkQueuePresentKHR.</pre><p>10) Does the vkAcquireNextImageKHR command return a semaphore to the
+    application via an output parameter, or accept a semaphore to
+    signal from the application as an object handle parameter?</p><pre class="literallayout">RESOLVED: Accept a semahpore to signal as an object handle.  This
+avoids the need to specify whether the application must destroy
+the semaphore or whether it is owned by the swapchain, and if
+the latter, what its lifetime is and whether it can be re-used
+for other operations once it is received from
+vkAcquireNextImageKHR.</pre><p>11) What types of swapchain queuing behavior should be exposed?  Options
+    include swap interval specification, mailbox/most recent Vs. FIFO
+    queue management, targeting specific vertical blank intervals or
+    absolute times for a given present opeation, and probably others.
+    For some of these, whether they are specified at swapchain creation
+    time or as per-present parameters needs to be decided as well.</p><pre class="literallayout">RESOLVED: The base swapchain extension will expose 3 possible
+behaviors (of which, FIFO will always be supported):</pre><pre class="literallayout">-Immediate present: Does not wait for vertical blanking period to
+ update the current image, likely resulting in visible tearing.
+ No internal queue is used.  Present requests are applied
+ immediately.</pre><pre class="literallayout">-Mailbox queue: Waits for the next vetical blanking period to
+ update the current image.  No tearing should be observed.  An
+ internal single-entry queue is used to hold pending presentation
+ requests.  If the queue is full when a new presentation
+ request is received, the new request replaces the existing entry,
+ and any images associated with the prior entry become available
+ for re-use by the application.</pre><pre class="literallayout">-FIFO queue: Waits for the next vertical blanking period to update
+ the current image.  No tearing should be observed.  An internal
+ queue containing (numSwapchainImages - 1) entries is used to
+ hold pending presentation requests.  New requests are appended to
+ the end of the queue, and one request is removed from the beginning
+ of the queue and processed during each vertical blanking period in
+ which the queue is non-empty</pre><pre class="literallayout">Not all surfaces will support all of these modes, so the modes
+supported will be returned using a surface info query.  All
+surfaces must support the FIFO queue mode.  Applications must choose
+one of these modes up front when creating a swapchain.  Switching
+modes can be accomplished by recreating the swapchain.</pre><p>12) Can VK_PRESENT_MODE_MAILBOX_KHR provide non-blocking guarantees for
+    vkAcquireNextImageKHR()?  If so, what is the proper criteria?</p><pre class="literallayout">RESOLVED: Yes.  The difficulty is not immediately obvious here.
+Naively, if at least 3 images are requested, mailbox mode should
+always have an image available for the application if the application
+does not own any images when the call to vkAcquireNextImageKHR() was
+made.  However, some presentation engines may have more than one
+"current" image, and would still need to block in some cases.  The
+right requirement appears to be that if the application allocates the
+surface's minimum number of images + 1 then it is guaranteed non-
+blocking behavior when it does not currently own any images.</pre><p>13) Is there a way to create and initialize a new swapchain for a
+    surface that has generated a VK_SUBOPTIMAL_KHR return code while still
+    using the old swapchain?</p><pre class="literallayout">RESOLVED: Not as part of this specification.  This could be useful to
+allow the application to create an "optimal" replacement swapchain
+and rebuild all its command buffers using it in a background thread at
+a low priority while continuing to use the "suboptimal" swapchain in
+the main thread.  It could probably use the same "atomic replace"
+semantics proposed for recreating direct-to-device swapchains without
+incuring a mode switch.  However, after discussion, it was determined
+some platforms probably could not support concurrent swapchains for
+the same surface though, so this will be left out of the base KHR
+extensions.  A future extension could add this for platfroms where it
+is supported.</pre><p>14) Should there be a special value for
+    VkSurfacePropertiesKHR::maxImageCount to indicate there are no
+    practical limits on the number of images in a swapchain?</p><pre class="literallayout">RESOLVED: Yes.  There where often be cases where there is no practical
+limit to the number of images in a swapchain other than the amount of
+available resources (I.e., memory) in the system.  Trying to derive a
+hard limit from things like memory size is prone to failure.  It is
+better in such cases to leave it to applications to figure such soft
+limits out via trial/failure iterations.</pre><p>15) Should there be a special value for
+    VkSurfacePropertiesKHR::currentExtent to indicate the size of the
+    platform surface is undefined?</p><pre class="literallayout">RESOLVED: Yes.  On some platforms (Wayland, for example), the surface
+size is defined by the images presented to it rather than the other
+way around.</pre><p>16) Should there be a special value for
+    VkSurfacePropertiesKHR::maxImageExtent to indicate there is no
+    practical limit on the surface size?</p><pre class="literallayout">RESOLVED: No.  It seems unlikely such a system would exist.  0 could
+be used to indicate the platform places no limits on the extents
+beyond those imposed by Vulkan for normal images, but this query could
+just as easily return those same limits, so a special "unlimited"
+value doesn't seem useful for this field.</pre><p>17) How should surface rotation and mirroring be exposed to applications?
+    How do they specify rotation and mirroring transforms applied prior
+    to presentation?</p><pre class="literallayout">RESOLVED: Applications can query both the supported and current
+transforms of a surface.  Both are specified relative to the device's
+"natural" display rotation and direction.  The supported transforms
+indicates which orientations the presentation engine accepts images
+in.  For example, a presentation engine that does not support
+transforming surfaces as part of presentation, and which is presenting
+to a surface that is displayed with a 90-degree rotation, would return
+only one supported transform bit: VK_SURFACE_TRANSFORM_ROT90_BIT_KHR.
+Applications must transform their rendering by the transform they
+specify when creating the swapchain in preTransform field.</pre><p>18) Can surfaces ever not support VK_MIRROR_NONE?  Can they support
+    vertical and horizontal mirroring simultaneously?  Relatedly, should
+    VK_MIRROR_NONE[_BIT] be zero, or bit one, and should applications be
+    allowed to specify multiple pre and current mirror transform bits, or
+    exactly one?</p><pre class="literallayout">RESOLVED: Since some platforms may not support presenting with a
+transform other than the native window's current transform, and
+pre-rotation/mirroring are specified relative to the device's
+natural rotation and direction, rather than relative to the surface's
+current rotation and direction, it is necessary to express lack of
+support for no mirroring.  To allow this, the MIRROR_NONE enum must
+occupy a bit in the flags.  Since MIRROR_NONE must be a bit in the
+bitfield rather than a bitfield with no values set, allowing more
+than one bit to be set in the bitfield would make it possible to
+describe undefined transforms such as VK_MIRROR_NONE_BIT |
+VK_MIRROR_HORIZONTAL_BIT, or a transform that includes both "no
+mirroring" and "horizontal mirroring simultaneously.  Therefore, it
+is desireable to allow specifying all supported mirroring transforms
+using only one bit.  The question then becomes, should there be a
+VK_MIRROR_HORIZONTAL_AND_VERTICAL_BIT to represent a simultaneous
+horizontal and vertical mirror transform?  However, such a transform
+is equivalent to a 180 degree rotation, so presentation engines and
+applications that wish to support or use such a transform can express
+it through rotation instead.  Therefore, 3 exclusive bits are
+sufficient to express all needed mirroring transforms.</pre><p>19) Should support for sRGB be required?</p><pre class="literallayout">RESOLVED: In the advent of UHD and HDR display devices, proper
+colorspace information is vital to the display pipeline
+represented by the swapchain.  The app can discover the
+supported format/colorspace pairs and select a pair most suited
+to its rendering needs.  Currently only the sRGB colorspace is
+supported, future extensions may provide support for more
+colorspaces.  See issues 23) and 24).</pre><p>20) Is there a mechanism to modify or replace an existing swapchain with
+    one targeting the same surface?</p><pre class="literallayout">RESOLVED: Yes.  This is described above in the text.</pre><p>21) Should there be a way to set pre-rotation and mirroring using native
+    APIs when presenting using a Vulkan swapchain?</p><pre class="literallayout">RESOLVED: Yes.  The transforms that can be expressed in this extension
+are a subset of those possible on native platforms.  If a platform
+exposes a method to specify the transform of presented images for a
+given surface using native methods and exposes more transforms or
+other properties for surfaces than Vulkan supports, it might be
+impossible, difficult, or inconvenient to set some of those properties
+using Vulkan KHR extensions and some using the native interfaces.  To
+avoid overwriting properties set using native commands when presenting
+using a Vulkan swapchain, the application can set the pre-transform to
+"inherit", in which case the current native properties will be used, or
+if none are available, a platform-specific default will be used.
+Platforms that do not specify a reasonable default or do not provide
+native mechanisms to specify such transforms should not include the
+inherit bits in the supportedTransform field they return in
+VkSurfacePropertiesKHR.</pre><p>22) Should the content of presentable images be clipped by objects
+    obscuring their target surface?</p><pre class="literallayout">RESOLVED: Applications can choose which behavior they prefer.  Allowing
+the content to be clipped could enable more optimal presentation
+methods on some platforms, but some applications might rely on the
+content of presentable images to perform techniques such as partial
+updates or motion blurs.</pre><p>23) What is the purpose of specifying a VkColorspaceKHR along with
+    VkFormat when creating a swapchain?</p><pre class="literallayout">RESOLVED: While Vulkan itself is colorspace agnostic (e.g. even the
+meaning of R, G, B and A can be freely defined by the rendering
+application), the swapchain eventually will have to present the
+images on a display device with specific color reproduction
+characteristics.  If any colorspace transformations are
+necessary before an image can be displayed, the colorspace of
+the presented image must be known to the swapchain.  A swapchain
+will only support a restricted set of color format and -space
+pairs.  This set can be discovered via vkGetSurfaceInfoKHR.  As
+it can be expected that most display devices support the sRGB
+colorspace, at least one format/colorspace pair has to be
+exposed, where colorspace is VK_COLOR_SPACE_SRGB_NONLINEAR.</pre><p>24) How are sRGB formats and the sRGB colorspace related?</p><pre class="literallayout">RESOLVED: While Vulkan exposes a number of SRGB texture formats, using
+such formats does not guarantee working in a specific
+colorspace.  It merely means that the hardware can directly
+support applying the non-linear transfer functions defined by
+the sRGB standard colorspace when reading from or writing to
+images of that these formats.  Still, it is unlikely that a
+swapchain will expose a _SRGB format along with any colorspace
+other than VK_COLOR_SPACE_SRGB_NONLINEAR.</pre><pre class="literallayout">On the other hand, non-_SRGB formats will be very likely
+exposed in pair with a SRGB colorspace.  This means, the
+hardware will not apply any transfer function when reading
+from or writing to such images, yet they will still be
+presented on a device with sRGB display characteristics.
+In this case the application is responsible for applying the
+transfer function, for instance by using shader math.</pre><p>25) How are the lifetime of surfaces and swapchains targeting them
+    related?</p><pre class="literallayout">RESOLVED: A surface must outlive any swapchains targeting it.  A
+VkSurfaceKHR owns the binding of the native window to the Vulkan
+driver.</pre><p>26) How can the client control the way the alpha channel of swap chain
+    images is treated by the presentation engine during compositing?</p><pre class="literallayout">RESOLVED: We should add new enum values to allow the client to
+negotiate with the presentation engine on how to treat image alpha
+values during the compositing process.  Since not all platforms
+can practically control this through the Vulkan driver, a value of
+INHERIT is provided like for surface transforms.</pre><p>27) Is vkCreateSwapchainKHR() the right function to return
+    VK_ERROR_NATIVE_WINDOW_IN_USE_KHR, or should the various platform-
+    specific VkSurface factory functions catch this error earlier?</p><pre class="literallayout">RESOLVED: For most platforms, the VkSurface structure is a simple
+container holding the data that identifies a native window or
+other object representing a surface on a particular platform.  For
+the surface factory functions to return this error, they would
+likely need to register a reference on the native objects with
+the native display server some how, and ensure no other such
+references exist.  Surfaces were not intended to be that heavy-
+weight.</pre><pre class="literallayout">Swapchains are intended to be the objects that directly manipulate
+native windows and communicate with the native presentation
+mechanisms.  Swapchains will already need to communicate with the
+native display server to negotiate allocation and/or presentation of
+presentable images for a native surface.  Therefore, it makes more
+sense for swapchain creation to be the point at which native object
+exclusivity is enforced.  Platforms may choose to enforce further
+restrictions on the number of VkSurface objects that may be created
+for the same native window if such a requirement makes sense on a
+particular platform, but a global requirement is only sensible at the
+swapchain level.</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_examples_2"></a>F.3.7. Examples</h3></div></div></div><p><span class="strong"><strong>Example 1</strong></span></p><p>Create a swapchain for a surface on a particular instance of a native platform.</p><pre class="programlisting">    extern VkDevice device;
+    extern VkSurfaceKHR surface;
+
+    // Must call extension functions through a function pointer:
+    PFN_vkGetSurfacePropertiesKHR pfnGetSurfacePropertiesKHR = (PFN_vkGetSurfacePropertiesKHR)vkGetDeviceProcAddr(device, "vkGetSurfaceInfoKHR");
+    PFN_vkGetSurfaceFormatsKHR pfnGetSurfaceFormatsKHR = (PFN_vkGetSurfaceFormatsKHR)vkGetDeviceProcAddr(device, "vkGetSurfaceFormatsKHR");
+    PFN_vkGetSurfacePresentModesKHR pfnGetSurfacePresentModesKHR = (PFN_vkGetSurfacePresentModesKHR)vkGetDeviceProcAddr(device, "vkGetSurfacePresentModesKHR");
+    PFN_vkCreateSwapchainKHR pfnCreateSwapchainKHR = (PFN_vkCreateSwapchainKHR)vkGetDeviceProcAddr(device, "vkCreateSwapchainKHR");
+
+    // Check the surface properties and formats
+    VkSurfacePropertiesKHR surfaceProperties;
+    pfnGetSurfacePropertiesKHR(device, surface, &amp;surfaceProperties);
+
+    uint32_t formatCount;
+    pfnGetSurfaceFormatsKHR(device, surface, &amp;formatCount, NULL);
+
+    VkSurfaceFormatKHR* pSurfFormats = (VkSurfaceFormatKHR*)malloc(formatCount * sizeof(VkSurfaceFormatKHR));
+    pfnGetSurfaceFormatsKHR(device, surface, &amp;formatCount, pSurfFormats);
+
+    uint32_t presentModeCount;
+    pfnGetSurfacePresentModesKHR(device, surface, &amp;presentModeCount, NULL);
+
+    VkPresentModeKHR* pPresentModes = (VkPresentModeKHR*)malloc(presentModeCount * sizeof(VkPresentModeKHR));
+    pfnGetSurfacePresentModesKHR(device, surface, &amp;presentModeCount, pPresentModes);
+
+    VkExtent2D swapchainExtent;
+    // width and height are either both -1, or both not -1.
+    if (surfaceProperties.currentExtent.width == -1)
+    {
+        // If the surface size is undefined, the size is set to
+        // the size of the images requested, which must fit within the minimum
+        // and maximum values.
+        swapchainExtent.width = 320;
+        swapchainExtent.height = 320;
+
+        if (swapchainExtent.width &lt; surfaceProperties.minImageExtent.width)
+            swapchainExtent.width = surfaceProperties.minImageExtent.width;
+        else if (swapchainExtent.width &gt; surfaceProperties.maxImageExtent.width)
+            swapchainExtent.width = surfaceProperties.maxImageExtent.width;
+
+        if (swapchainExtent.height &lt; surfaceProperties.minImageExtent.height)
+            swapchainExtent.height = surfaceProperties.minImageExtent.height;
+        else if (swapchainExtent.height &gt; surfaceProperties.maxImageExtent.height)
+            swapchainExtent.height = surfaceProperties.maxImageExtent.height;
+    }
+    else
+    {
+        // If the surface size is defined, the swapchain size must match
+        swapchainExtent = surfaceProperties.currentExtent;
+    }
+
+    // Application desires to own 2 images at a time (still allowing
+    // 'minImageCount' images to be owned by the presentation engine).
+    uint32_t desiredNumberOfSwapchainImages = surfaceProperties.minImageCount + 2;
+    if ((surfaceProperties.maxImageCount &gt; 0) &amp;&amp;
+        (desiredNumberOfSwapchainImages &gt; surfaceProperties.maxImageCount))
+    {
+        // Application must settle for fewer images than desired:
+        desiredNumberOfSwapchainImages = surfaceProperties.maxImageCount;
+    }
+
+    VkFormat swapchainFormat;
+    // If the format list includes just one entry of VK_FORMAT_UNDEFINED,
+    // the surface has no preferred format.  Otherwise, at least one
+    // supported format will be returned (assuming that the
+    // vkGetPhysicalDeviceSurfaceSupportKHR function, in the
+    // VK_KHR_surface extension returned support for the surface).
+    if ((formatCount == 1) &amp;&amp; (pSurfFormats[0].format == VK_FORMAT_UNDEFINED))
+        swapchainFormat = VK_FORMAT_R8G8B8_UNORM;
+    else
+    {
+        assert(formatCount &gt;= 1);
+        swapchainFormat = pSurfFormats[0].format;
+    }
+    VkColorSpaceKHR swapchainColorSpace = pSurfFormats[0].colorSpace;
+
+    // If mailbox mode is available, use it, as it is the lowest-latency non-
+    // tearing mode.  If not, fall back to FIFO which is always available.
+    VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;
+    for (size_t i = 0; i &lt; presentModeCount; ++i)
+        if (pPresentModes[i] == VK_PRESENT_MODE_MAILBOX_KHR)
+        {
+            swapchainPresentMode = VK_PRESENT_MODE_MAILBOX_KHR;
+            break;
+        }
+
+    const VkSwapchainCreateInfoKHR createInfo =
+    {
+        VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,    // sType
+        NULL,                                           // pNext
+        0,                                              // flags
+        surface,                                        // surface
+        desiredNumberOfSwapchainImages,                 // minImageCount
+        swapchainFormat,                                // imageFormat
+        swapchainColorSpace,                            // imageColorSpace
+        swapchainExtent,                                // imageExtent
+        1,                                              // imageArrayLayers
+        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,            // imageUsage
+        VK_SHARING_MODE_EXCLUSIVE,                      // imageSharingMode
+        0,                                              // queueFamilyIndexCount
+        NULL,                                           // pQueueFamilyIndices
+        surfaceProperties.currentTransform,             // preTransform
+        VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,             // compositeAlpha
+        swapchainPresentMode,                           // presentMode
+        VK_TRUE,                                        // clipped
+        VK_NULL_HANDLE                                  // oldSwapchain
+    };
+
+    VkSwapchainKHR swapchain;
+    pfnCreateSwapchainKHR(device, &amp;createInfo, NULL, &amp;swapchain);</pre><p><span class="strong"><strong>Example 2</strong></span></p><p>Obtaining the persistent images of a swapchain</p><pre class="programlisting">    // Must call extension functions through a function pointer:
+    PFN_vkGetSwapchainImagesKHR pfnGetSwapchainImagesKHR = (PFN_vkGetSwapchainImagesKHR)vkGetDeviceProcAddr(device, "vkGetSwapchainImagesKHR");
+
+    uint32_t swapchainImageCount;
+    pfnGetSwapchainImagesKHR(device, swapchain, &amp;swapchainImageCount, NULL);
+
+    VkImage* pSwapchainImages = (VkImage*)malloc(swapchainImageCount * sizeof(VkImage));
+    pfnGetSwapchainImagesKHR(device, swapchain, &amp;swapchainImageCount, pSwapchainImages);</pre><p><span class="strong"><strong>Example 3</strong></span></p><p>Simple rendering and presenting using separate graphics and
+present queues.</p><pre class="programlisting">    // Must call extension functions through a function pointer:
+    PFN_vkAcquireNextImageKHR pfnAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vkGetDeviceProcAddr(device, "vkAcquireNextImageKHR");
+    PFN_vkQueuePresentKHR pfnQueuePresentKHR = (PFN_vkQueuePresentKHR)vkGetDeviceProcAddr(device, "vkQueuePresentKHR");
+
+    // Construct command buffers rendering to the presentable images
+    VkCmdBuffer cmdBuffers[swapchainImageCount];
+    VkImageView views[swapchainImageCount];
+    extern VkCmdBufferBeginInfo beginInfo;
+    extern uint32_t graphicsQueueFamilyIndex, presentQueueFamilyIndex;
+
+    for (size_t i = 0; i &lt; swapchainImageCount; ++i)
+    {
+        const VkImageViewCreateInfo viewInfo =
+        {
+            VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,   // sType
+            NULL,                                       // pNext
+            0,                                          // flags
+            pSwapchainImages[i],                        // image
+            VK_IMAGE_VIEW_TYPE_2D,                      // viewType
+            swapchainFormat,                            // format
+            ...
+        };
+        vkCreateImageView(device, &amp;viewInfo, &amp;views[i]);
+
+        ...
+
+        vkBeginCommandBuffer(cmdBuffers[i], &amp;beginInfo);
+
+        // Need to transition image from presentable state before being able to render
+        const VkImageMemoryBarrier acquireImageBarrier =
+        {
+            VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,     // sType
+            NULL,                                       // pNext
+            VK_ACCESS_MEMORY_READ_BIT,                  // srcAccessMask
+            VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,       // dstAccessMask
+            VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,            // oldLayout
+            VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,   // newLayout
+            presentQueueFamilyIndex,                    // srcQueueFamilyIndex
+            graphicsQueueFamilyIndex,                   // dstQueueFamilyIndex
+            pSwapchainImages[i].image,                  // image
+            ...
+        };
+
+        vkCmdPipelineBarrier(
+            cmdBuffers[i],
+            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_FALSE,
+            1,
+            &amp;acquireImageBarrier)
+
+        // ... Render to views[i] ...
+
+        // Need to transition image into presentable state before being able to present
+        const VkImageMemoryBarrier presentImageBarrier =
+        {
+            VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,     // sType
+            NULL,                                       // pNext
+            VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,       // srcAccessMask
+            VK_ACCESS_MEMORY_READ_BIT,                  // dstAccessMask
+            VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,   // oldLayout
+            VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,            // newLayout
+            graphicsQueueFamilyIndex,                   // srcQueueFamilyIndex
+            presentQueueFamilyIndex,                    // dstQueueFamilyIndex
+            pSwapchainImages[i].image,                  // image
+            ...
+        };
+
+        vkCmdPipelineBarrier(
+            cmdBuffers[i],
+            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+            VK_FALSE,
+            1,
+            &amp;presentImageBarrier);
+
+        ...
+
+        vkEndCommandBuffer(cmdBuffers[i]);
+    }
+
+    const VkSemaphoreCreateInfo semaphoreCreateInfo =
+    {
+        VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,    // sType
+        NULL,                                       // pNext
+        0                                           // flags
+    };
+
+    VkSemaphore imageAcquiredSemaphore;
+    vkCreateSemaphore(device,
+                      &amp;semaphoreCreateInfo,
+                      &amp;imageAcquiredSemaphore);
+
+    VkSemaphore renderingCompleteSemaphore;
+    vkCreateSemaphore(device,
+                      &amp;semaphoreCreateInfo,
+                      &amp;renderingCompleteSemaphore);
+
+    VkResult result;
+    do
+    {
+        uint32_t imageIndex = UINT32_MAX;
+
+        // Get the next available swapchain image
+        result = pfnAcquireNextImageKHR(
+            device,
+            swapchain,
+            UINT64_MAX,
+            imageAcquiredSemaphore,
+            VK_NULL_HANDLE,
+            &amp;imageIndex);
+
+        // Swapchain cannot be used for presentation if failed to acquired new image.
+        if (result &lt; 0)
+            break;
+
+        // Submit rendering work to the graphics queue
+        const VkPipelineStageFlags waitDstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+        const VkSubmitInfo submitInfo =
+        {
+            VK_STRUCTURE_TYPE_SUBMIT_INFO,          // sType
+            NULL,                                   // pNext
+            1,                                      // waitSemaphoreCount
+            &amp;imageAcquiredSemaphore,                // pWaitSemaphores
+            &amp;waitDstStageMask,                      // pWaitDstStageMasks
+            1,                                      // commandBufferCount
+            &amp;cmdBuffers[imageIndex],                // pCommandBuffers
+            1,                                      // signalSemaphoreCount
+            &amp;renderingCompleteSemaphore             // pSignalSemaphores
+        };
+        vkQueueSubmit(graphicsQueue, 1, &amp;submitInfo, VK_NULL_HANDLE);
+
+        // Submit present operation to present queue
+        const VkPresentInfoKHR presentInfo =
+        {
+            VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,     // sType
+            NULL,                                   // pNext
+            1,                                      // waitSemaphoreCount
+            &amp;renderingCompleteSemaphore,            // pWaitSemaphores
+            1,                                      // swapchainCount
+            &amp;swapchain,                             // pSwapchains
+            &amp;imageIndex,                            // pImageIndices
+            NULL                                    // pResults
+        };
+
+        result = pfnQueuePresentKHR(presentQueue, &amp;presentInfo);
+    } while (result &gt;= 0);</pre><p><span class="strong"><strong>Example 4</strong></span></p><p>Handle VK_ERROR_OUT_OF_DATE_KHR by recreating the swapchain and
+VK_SUBOPTIMAL_KHR by checking whether recreation is needed.</p><pre class="programlisting">    extern VkDevice device;
+    extern VkQueue presentQueue;
+    extern VkSurfaceKHR surface;
+
+    // Contains code to build the application's reusable command buffers.
+    extern void CreateCommandBuffers(VkDevice device,
+                                     const VkImage* swapchainImages);
+
+    // Returns non-zero if the application considers the swapchain out
+    // of date even though it is still compatible with the platform
+    // surface it is targeting.
+    extern int MustRecreateSwapchain(VkDevice device,
+                                     VkSwapchainKHR swapchain,
+                                     VkSurfaceKHR surface);
+
+    PFN_vkGetSurfacePropertiesKHR pfnGetSurfacePropertiesKHR;
+    PFN_vkGetSurfaceFormatsKHR pfnGetSurfaceFormatsKHR;
+    PFN_vkGetSurfacePresentModesKHR pfnGetSurfacePresentModesKHR;
+    PFN_vkCreateSwapchainKHR pfnCreateSwapchainKHR;
+    PFN_vkGetSwapchainImagesKHR pfnGetSwapchainImagesKHR;
+    PFN_vkAcquireNextImageKHR pfnAcquireNextImageKHR;
+    PFN_vkDestroySwapchainKHR pfnDestroySwapchainKHR;
+    PFN_vkQueuePresentKHR pfnQueuePresentKHR;
+
+    void initFuncs(void)
+    {
+        // Must call extension functions through a function pointer:
+        pfnGetSurfacePropertiesKHR = (PFN_vkGetSurfacePropertiesKHR)vkGetDeviceProcAddr(device, "vkGetSurfaceInfoKHR");
+        pfnGetSurfaceFormatsKHR = (PFN_vkGetSurfaceFormatsKHR)vkGetDeviceProcAddr(device, "vkGetSurfaceFormatsKHR");
+        pfnGetSurfacePresentModesKHR = (PFN_vkGetSurfacePresentModesKHR)vkGetDeviceProcAddr(device, "vkGetSurfacePresentModesKHR");
+        pfnCreateSwapchainKHR = (PFN_vkCreateSwapchainKHR)vkGetDeviceProcAddr(device, "vkCreateSwapchainKHR");
+        pfnGetSwapchainImagesKHR = (PFN_vkGetSwapchainImagesKHR)vkGetDeviceProcAddr(device, "vkGetSwapchainImagesKHR");
+        pfnAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vkGetDeviceProcAddr(device, "vkAcquireNextImageKHR");
+        pfnDestroySwapchainKHR = (PFN_vkDestroySwapchainKHR)vkGetDeviceProcAddr(device, "vkDestroySwapchainKHR");
+        pfnQueuePresentKHR = (PFN_vkQueuePresentKHR)vkGetDeviceProcAddr(device, "vkQueuePresentKHR");
+    }
+
+    void CreateSwapchain(VkDevice device,
+                         VkSurfaceKHR surface,
+                         VkSwapchainKHR oldSwapchain,
+                         VkSwapchainKHR* pSwapchain)
+    {
+        // Check the surface properties and formats
+        VkSurfacePropertiesKHR surfaceProperties;
+        pfnGetSurfacePropertiesKHR(device, surface, &amp;surfaceProperties);
+
+        uint32_t formatCount;
+        pfnGetSurfaceFormatsKHR(device, surface, &amp;formatCount, NULL);
+
+        VkSurfaceFormatKHR* pSurfFormats = (VkSurfaceFormatKHR*)malloc(formatCount * sizeof(VkSurfaceFormatKHR));
+        pfnGetSurfaceFormatsKHR(device, surface, &amp;formatCount, pSurfFormats);
+
+        uint32_t presentModeCount;
+        pfnGetSurfacePresentModesKHR(device, surface, &amp;presentModeCount, NULL);
+
+        VkPresentModeKHR* pPresentModes = (VkPresentModeKHR*)malloc(presentModeCount * sizeof(VkPresentModeKHR));
+        pfnGetSurfacePresentModesKHR(device, surface, &amp;presentModeCount, pPresentModes);
+
+        VkExtent2D swapchainExtent;
+        // width and height are either both -1, or both not -1.
+        if (surfaceProperties.currentExtent.width == -1)
+        {
+            // If the surface size is undefined, the size is set to
+            // the size of the images requested, which must fit within the minimum
+            // and maximum values.
+            swapchainExtent.width = 320;
+            swapchainExtent.height = 320;
+
+            if (swapchainExtent.width &lt; surfaceProperties.minImageExtent.width)
+                swapchainExtent.width = surfaceProperties.minImageExtent.width;
+            else if (swapchainExtent.width &gt; surfaceProperties.maxImageExtent.width)
+                swapchainExtent.width = surfaceProperties.maxImageExtent.width;
+
+            if (swapchainExtent.height &lt; surfaceProperties.minImageExtent.height)
+                swapchainExtent.height = surfaceProperties.minImageExtent.height;
+            else if (swapchainExtent.height &gt; surfaceProperties.maxImageExtent.height)
+                swapchainExtent.height = surfaceProperties.maxImageExtent.height;
+        }
+        else
+        {
+            // If the surface size is defined, the swapchain size must match
+            swapchainExtent = surfaceProperties.currentExtent;
+        }
+
+        // Application desires to own 2 images at a time (still allowing
+        // 'minImageCount' images to be owned by the presentation engine).
+        uint32_t desiredNumberOfSwapchainImages = surfaceProperties.minImageCount + 2;
+        if ((surfaceProperties.maxImageCount &gt; 0) &amp;&amp;
+            (desiredNumberOfSwapchainImages &gt; surfaceProperties.maxImageCount))
+        {
+            // Application must settle for fewer images than desired:
+            desiredNumberOfSwapchainImages = surfaceProperties.maxImageCount;
+        }
+
+        VkFormat swapchainFormat;
+        // If the format list includes just one entry of VK_FORMAT_UNDEFINED,
+        // the surface has no preferred format.  Otherwise, at least one
+        // supported format will be returned (assuming that the
+        // vkGetPhysicalDeviceSurfaceSupportKHR function, in the
+        // VK_KHR_surface extension returned support for the surface).
+        if ((formatCount == 1) &amp;&amp; (pSurfFormats[0].format == VK_FORMAT_UNDEFINED))
+            swapchainFormat = VK_FORMAT_R8G8B8_UNORM;
+        else
+        {
+            assert(formatCount &gt;= 1);
+            swapchainFormat = pSurfFormats[0].format;
+        }
+        VkColorSpaceKHR swapchainColorSpace = pSurfFormats[0].colorSpace;
+
+        // If mailbox mode is available, use it, as it is the lowest-latency non-
+        // tearing mode.  If not, fall back to FIFO which is always available.
+        VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;
+        for (size_t i = 0; i &lt; presentModeCount; ++i)
+            if (pPresentModes[i] == VK_PRESENT_MODE_MAILBOX_KHR) {
+                swapchainPresentMode = VK_PRESENT_MODE_MAILBOX_KHR;
+                break;
+            }
+
+        const VkSwapchainCreateInfoKHR createInfo =
+        {
+            VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,  // sType
+            NULL,                                         // pNext
+            0,                                            // flags
+            surface,                                      // surface
+            desiredNumberOfSwapchainImages,               // minImageCount
+            swapchainFormat,                              // imageFormat
+            swapchainColorSpace,                          // imageColorSpace
+            swapchainExtent,                              // imageExtent
+            1,                                            // imageArrayLayers
+            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,          // imageUsage
+            VK_SHARING_MODE_EXCLUSIVE,                    // imageSharingMode
+            0,                                            // queueFamilyIndexCount
+            NULL,                                         // pQueueFamilyIndices
+            surfaceProperties.currentTransform,           // preTransform
+            VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,           // compositeAlpha
+            swapchainPresentMode,                         // presentMode
+            VK_TRUE,                                      // clipped
+
+            // If the caller specified an existing swapchain, replace it with the
+            // new swapchain being created here.  This will allow a seamless
+            // transition between the old and new swapchains on platforms that
+            // support it.
+            oldSwapchain                                  // oldSwapchain
+        };
+
+        pfnCreateSwapchainKHR(device, &amp;createInfo, NULL, pSwapchain);
+
+        // Clean up the old swapchain, if it exists.
+        // Note: destroying the swapchain also cleans up all its associated
+        // presentable images once the platform is done with them.
+        if (oldSwapchain != VK_NULL_HANDLE)
+        {
+            pfnDestroySwapchainKHR(device, oldSwapchain, NULL);
+        }
+    }
+
+    void mainLoop(void)
+    {
+        VkSwapchainKHR swapchain = VK_NULL_HANDLE;
+
+        const VkSemaphoreCreateInfo semaphoreCreateInfo =
+        {
+            VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,    // sType
+            NULL,                                       // pNext
+            0                                           // flags
+        };
+
+        VkSemaphore imageAcquiredSemaphore;
+        vkCreateSemaphore(device,
+                          &amp;semaphoreCreateInfo,
+                          &amp;imageAcquiredSemaphore);
+
+        VkSemaphore renderingCompleteSemaphore;
+        vkCreateSemaphore(device,
+                          &amp;semaphoreCreateInfo,
+                          &amp;renderingCompleteSemaphore);
+
+        while (1)
+        {
+            VkResult result;
+
+            CreateSwapchain(device, surface, swapchain, &amp;swapchain);
+
+            uint32_t swapchainImageCount;
+            pfnGetSwapchainImagesKHR(device, swapchain, &amp;swapchainImageCount, NULL);
+
+            VkImage* pSwapchainImages = (VkImage*)malloc(swapchainImageCount * sizeof(VkImage));
+            pfnGetSwapchainImagesKHR(device, swapchain, &amp;swapchainImageCount, pSwapchainImages);
+
+            CreateCommandBuffers(device, pSwapchainImages);
+            free(pSwapchainImages);
+
+            while (1)
+            {
+                uint32_t imageIndex;
+
+                // Get the next available swapchain image
+                result = pfnAcquireNextImageKHR(
+                    device,
+                    swapchain,
+                    UINT64_MAX,
+                    imageAcquiredSemaphore,
+                    VK_NULL_HANDLE,
+                    &amp;imageIndex);
+
+                if (result == VK_ERROR_OUT_OF_DATE_KHR)
+                {
+                    // swapchain is out of date.  Needs to be recreated for
+                    // defined results.
+                    break;
+                }
+                else if (result == VK_SUBOPTIMAL_KHR)
+                {
+                    // Ignore this result here.  If any expensive pre-processing
+                    // work has already been done for this frame, it is likely
+                    // in the application's interest to continue processing this
+                    // frame with the current swapchain rather than recreate it
+                    // and waste the pre-processing work.
+                }
+                else if (result &lt; 0)
+                {
+                    // Unhandled error.  Abort.
+                    return;
+                }
+
+                // Submit rendering work to the graphics queue
+                const VkPipelineStageFlags waitDstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+                const VkSubmitInfo submitInfo =
+                {
+                    VK_STRUCTURE_TYPE_SUBMIT_INFO,          // sType
+                    NULL,                                   // pNext
+                    1,                                      // waitSemaphoreCount
+                    &amp;imageAcquiredSemaphore,                // pWaitSemaphores
+                    &amp;waitDstStageMask,                      // pWaitDstStageMasks
+                    1,                                      // commandBufferCount
+                    &amp;cmdBuffers[imageIndex],                // pCommandBuffers
+                    1,                                      // signalSemaphoreCount
+                    &amp;renderingCompleteSemaphore             // pSignalSemaphores
+                };
+                vkQueueSubmit(graphicsQueue, 1, &amp;submitInfo, VK_NULL_HANDLE);
+
+                // Submit present operation to present queue
+                const VkPresentInfoKHR presentInfo =
+                {
+                    VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,     // sType
+                    NULL,                                   // pNext
+                    1,                                      // waitSemaphoreCount
+                    &amp;renderingCompleteSemaphore,            // pWaitSemaphores
+                    1,                                      // swapchainCount
+                    &amp;swapchain,                             // pSwapchains
+                    &amp;imageIndex,                            // pImageIndices
+                    NULL                                    // pResults
+                };
+
+                result = pfnQueuePresentKHR(presentQueue, &amp;presentInfo);
+
+                if (result == VK_ERROR_OUT_OF_DATE_KHR)
+                {
+                    // The swapchain is out of date, and must be recreated for
+                    // defined results.
+                    break;
+                }
+                else if (result == VK_SUBOPTIMAL_KHR)
+                {
+                    // Something has changed about the native surface since the
+                    // swapchain was created, but it is still compatible with the
+                    // swapchain.  The app must choose whether it wants to create
+                    // a more up to date swapchain before it begins processing
+                    // the next frame.
+                    if (MustRecreateSwapchain(device, swapchain, surface))
+                        break;
+                }
+                else if (result &lt; 0)
+                {
+                    // Unhandled error.  Abort.
+                    return;
+                }
+            }
+        }
+    }</pre><p><span class="strong"><strong>Example 5</strong></span></p><p>Meter a CPU thread based on presentation rate.
+Note this will only limit the thread to the actual presentation
+rate when using VK_PRESENT_MODE_FIFO_KHR.  When using
+VK_PRESENT_MODE_IMMEDIATE_KHR, presentation rate will be limited only
+by rendering rate, so this example will be equivalent to waiting on a
+command buffer fence.  When using VK_PRESENT_MODE_MAILBOX_KHR, some
+presented images may be skipped if a newer image is available by the
+time the presentation target is ready to process a new frame, so this
+code would again be limited only by the rendering rate.  Applications
+using mailbox mode should use some other mechanism to meter their
+rendering, and it is assumed applications using immediate mode have no
+desire to limit the rate of their rendering based on presentation rate.</p><pre class="programlisting">    extern void CreateSemAndFences(VkDevice device, VkSemaphore sem, VkFence *fences, const int maxOutstandingPresents);
+    extern void GenFrameCmdBuffer(VkCmdbuffer cmdBuffer);
+
+    extern VkDevice device;
+    extern VkQueue queue;
+    extern VkCmdBuffer cmdBuffer;
+    extern VkSwapchain fifoModeSwapchain;
+    extern numSwapchainImages;
+
+    // Must call extension functions through a function pointer:
+    PFN_vkAcquireNextImageKHR pfnAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vkGetDeviceProcAddr(device, "vkAcquireNextImageKHR");
+    PFN_vkQueuePresentKHR pfnQueuePresentKHR = (PFN_vkQueuePresentKHR)vkGetDeviceProcAddr(device, "vkQueuePresentKHR");
+
+    // Allow a maximum of two outstanding presentation operations.
+    static const int FRAME_LAG = 2
+
+    VkPresentInfoKHR presentInfo;
+    const VkSemaphoreCreateInfo semaphoreCreateInfo =
+    {
+        VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,    // sType
+        NULL,                                       // pNext
+        0                                           // flags
+    };
+
+    VkSemaphore imageAcquiredSemaphore;
+    vkCreateSemaphore(device,
+                      &amp;semaphoreCreateInfo,
+                      &amp;imageAcquiredSemaphore);
+
+    VkSemaphore renderingCompleteSemaphore;
+    vkCreateSemaphore(device,
+                      &amp;semaphoreCreateInfo,
+                      &amp;renderingCompleteSemaphore);
+
+    VkFence fences[FRAME_LAG];
+    bool fencesInited[FRAME_LAG];
+    int frameIdx = 0;
+    int imageIdx = 0;
+    int waitFrame;
+
+    CreateFences(device, fences, FRAME_LAG);
+
+    for (int i = 0; i &lt; FRAME_LAG; ++i)
+        fencesInited[i] = false;
+
+    while (1) {
+        if (fencesInited[frameIdx])
+        {
+            // Ensure no more than FRAME_LAG presentations are outstanding
+            vkWaitForFences(device, 1, &amp;fences[frameIdx], VK_TRUE, UINT64_MAX);
+            vkResetFences(device, 1, &amp;fences[frameIdx]);
+        }
+
+        pfnAcquireNextImageKHR(
+            device,
+            fifoSwapchain,
+            UINT64_MAX,
+            imageAcquiredSemaphore,
+            fences[frameIdx],
+            &amp;imageIdx);
+
+        fencesInited[frameIdx] = true;
+
+        // Generate a command buffer for the current frame.
+        GenFrameCmdBuffer(cmdBuffer);
+
+        // Submit rendering work to the graphics queue
+        const VkPipelineStageFlags waitDstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+        const VkSubmitInfo submitInfo =
+        {
+            VK_STRUCTURE_TYPE_SUBMIT_INFO,          // sType
+            NULL,                                   // pNext
+            1,                                      // waitSemaphoreCount
+            &amp;imageAcquiredSemaphore,                // pWaitSemaphores
+            &amp;waitDstStageMask,                      // pWaitDstStageMasks
+            1,                                      // commandBufferCount
+            &amp;cmdBuffer,                             // pCommandBuffers
+            1,                                      // signalSemaphoreCount
+            &amp;renderingCompleteSemaphore             // pSignalSemaphores
+        };
+        vkQueueSubmit(queue, 1, &amp;submitInfo, VK_NULL_HANDLE);
+
+        // Submit present operation to present queue
+        const VkPresentInfoKHR presentInfo =
+        {
+            VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,     // sType
+            NULL,                                   // pNext
+            1,                                      // waitSemaphoreCount
+            &amp;renderingCompleteSemaphore,            // pWaitSemaphores
+            1,                                      // swapchainCount
+            &amp;fifoSwapchain,                         // pSwapchains
+            &amp;imageIdx,                              // pImageIndices
+            NULL                                    // pResults
+        };
+
+        result = pfnQueuePresentKHR(queue, &amp;presentInfo);
+
+        frameIdx += 1;
+        frameIdx %= FRAME_LAG;
+    }</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_version_history_3"></a>F.3.8. Version History</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Revision 1, 2015-05-20 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Initial draft, based on LunarG KHR spec, other KHR specs, patches attached
+     to bugs.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 2, 2015-05-22 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Made many agreed-upon changes from 2015-05-21 KHR TSG meeting.
+     This includes using only a queue for presentation, and having an
+     explict function to acquire the next image.
+</li><li class="listitem">
+Fixed typos and other minor mistakes.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 3, 2015-05-26 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Improved the Description section.
+</li><li class="listitem">
+Added or resolved issues that were found in improving the Description.
+     For example, pSurfaceDescription is used consistently, instead of
+     sometimes using pSurface.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 4, 2015-05-27 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Fixed some grammatical errors and typos
+</li><li class="listitem">
+Filled in the description of imageUseFlags when creating a
+     swapchain.
+</li><li class="listitem">
+Added a description of swapInterval.
+</li><li class="listitem">
+Replaced the paragraph describing the order of operations on
+     a queue for image ownership and presentation.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 5, 2015-05-27 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Imported relevant issues from the (abandoned)
+     vk_wsi_persistent_swapchain_images extension.
+</li><li class="listitem">
+Added issues 6 and 7, regarding behavior of the acquire next
+     image and present commands with respect to queues.
+</li><li class="listitem">
+Updated spec language and examples to align with proposed
+     resolutions to issues 6 and 7.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 6, 2015-05-27 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added issue 8, regarding atomic presentation of multiple swapchains
+</li><li class="listitem">
+Updated spec language and examples to align with proposed resolution
+     to issue 8.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 7, 2015-05-27 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Fixed compilation errors in example code, and made related spec
+     fixes.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 8, 2015-05-27 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added issue 9, and the related VK_SUBOPTIMAL_KHR result code.
+</li><li class="listitem">
+Renamed VK_OUT_OF_DATE_KHR to VK_ERROR_OUT_OF_DATE_KHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 9, 2015-05-27 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added inline proposed resolutions (marked with [JRJ]) to some
+     XXX questions/issues.  These should be moved to the issues
+     section in a subsequent update if the proposals are adopted.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 10, 2015-05-28 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Converted vkAcquireNextImageKHR back to a non-queue operation
+     that uses a VkSemaphore object for explicit synchronization.
+</li><li class="listitem">
+Added issue 10 to determine whether vkAcquireNextImageKHR
+     generates or returns semaphores, or whether it operates on a
+     semaphore provided by the application.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 11, 2015-05-28 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Marked issues 6, 7, and 8 resolved.
+</li><li class="listitem">
+Renamed VkSurfaceCapabilityPropertiesKHR to VkSurfacePropertiesKHR
+     to better convey the mutable nature of the info it contains.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 12, 2015-05-28 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added issue 11 with a proposed resolution, and the related issue 12.
+</li><li class="listitem">
+Updated various sections of the spec to match the proposed
+     resolution to issue 11.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 13, 2015-06-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Moved some structures to VK_EXT_KHR_swap_chain to resolve the spec’s
+     issues 1 and 2.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 14, 2015-06-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added code for example 4 demonstrating how an application might
+     make use of the two different present and acquire next image KHR
+     result codes.
+</li><li class="listitem">
+Added issue 13.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 15, 2015-06-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added issues 14 - 16 and related spec language.
+</li><li class="listitem">
+Fixed some spelling errors.
+</li><li class="listitem">
+Added language describing the meaningful return values
+     for vkAcquireNextImageKHR and vkQueuePresentKHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 16, 2015-06-02 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added issues 17 and 18, as well as related spec language.
+</li><li class="listitem">
+Removed some erroneous text added by mistake in the last
+     upate.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 17, 2015-06-15 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Changed special value from "-1" to "0" so that the data types can be
+     unsigned.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 18, 2015-06-15 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Clarified the values of VkSurfacePropertiesKHR::minImageCount and the
+     timeout parameter of the vkAcquireNextImageKHR function.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 19, 2015-06-17 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Misc. cleanup.  Removed resolved inline issues and fixed typos.
+</li><li class="listitem">
+Fixed clarification of VkSurfacePropertiesKHR::minImageCount made in
+     version 18.
+</li><li class="listitem">
+Added a brief "Image Ownership" definition to the list of terms used
+     in the spec.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 20, 2015-06-17 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Updated enum-extending values using new convention.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 21, 2015-06-17 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added language describing how to use
+     VK_IMAGE_LAYOUT_PRESENT_SOURCE_KHR.
+</li><li class="listitem">
+Cleaned up an XXX comment regarding the description of which queues
+     vkQueuePresentKHR can be used on.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 22, 2015-06-17 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Rebased on Vulkan API version 126.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 23, 2015-06-18 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Updated language for issue 12 to read as a proposed resolution.
+</li><li class="listitem">
+Marked issues 11, 12, 13, 16, and 17 resolved.
+</li><li class="listitem">
+Temporarily added links to the relevant bugs under the remaining
+     unresolved issues.
+</li><li class="listitem">
+Added issues 19 and 20 as well as proposed resolutions.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 24, 2015-06-19 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Changed special value for VkSurfacePropertiesKHR::currentExtent back
+     to "-1" from "0".  This value will never need to be unsigned, and "0"
+     is actually a legal value.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 25, 2015-06-23 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Examples now show use of function pointers for extension functions.
+</li><li class="listitem">
+Eliminated extraneous whitespace.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 26, 2015-06-25 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Resolved Issues 9 &amp; 10 per KHR TSG meeting.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 27, 2015-06-25 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added oldSwapchain member to VkSwapchainCreateInfoKHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 28, 2015-06-25 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added the "inherit" bits to the rotatation and mirroring flags and
+     the associated issue 21.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 29, 2015-06-25 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added the "clipped" flag to VkSwapchainCreateInfoKHR, and the
+     associated issue 22.
+</li><li class="listitem">
+Specified that presenting an image does not modify it.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 30, 2015-06-25 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added language to the spec that clarifies the behavior of
+     vkCreateSwapchainKHR() when the oldSwapchain field of
+     VkSwapchainCreateInfoKHR is not NULL.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 31, 2015-06-26 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Example of new VkSwapchainCreateInfoKHR members, "oldSwapchain" and
+     "clipped".
+</li><li class="listitem">
+Example of using VkSurfacePropertiesKHR::{min|max}ImageCount to set
+     VkSwapchainCreateInfoKHR::minImageCount.
+</li><li class="listitem">
+Rename vkGetSurfaceInfoKHR()'s 4th param to "pDataSize", for
+     consistency with other functions.
+</li><li class="listitem">
+Add macro with C-string name of extension (just to header file).
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 32, 2015-06-26 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Minor adjustments to the language describing the behavior of
+     "oldSwapchain"
+</li><li class="listitem">
+Fixed the version date on my previous two updates.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 33, 2015-06-26 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Add usage flags to VkSwapchainCreateInfoKHR
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 34, 2015-06-26 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Rename vkQueuePresentKHR()'s 2nd param to "pPresentInfo", for
+     consistency with other functions.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 35, 2015-06-26 (Jason Ekstrand)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Merged the VkRotationFlagBitsKHR and VkMirrorFlagBitsKHR enums
+     into a single VkSurfaceTransformFlagBitsKHR enum.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 36, 2015-06-26 (Jason Ekstrand)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added a VkSurfaceTransformKHR enum that isn’t a bitfield.  Each
+     value in VkSurfaceTransformKHR corresponds directly to one of the
+     bits in VkSurfaceTransformFlagBitsKHR so transforming from one to
+     the other is easy.  Having a separate enum means that
+     currentTransform and preTransform are now unambiguous by
+     definition.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 37, 2015-06-29 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Corrected one of the signatures of vkAcquireNextImageKHR, which had
+     the last two parameters switched from what it is elsewhere in the
+     specification and header files.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 38, 2015-06-30 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Corrected a typo in description of the vkGetSwapchainInfoKHR()
+     function.
+</li><li class="listitem">
+Corrected a typo in header file comment for VkPresentInfoKHR::sType.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 39, 2015-07-07 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added error section describing when each error is expected to be
+     reported.
+</li><li class="listitem">
+Replaced bool32_t with VkBool32.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 40, 2015-07-10 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Updated to work with version 138 of the "vulkan.h" header.  This
+     includes declaring the VkSwapchainKHR type using the new
+     VK_DEFINE_NONDISP_HANDLE macro, and no longer extending VkObjectType
+     (which was eliminated).
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 41 2015-07-09 (Mathias Heyer)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added colorspace language.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 42, 2015-07-10 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Updated query mechanism to reflect the convention changes done in
+     the core spec.
+</li><li class="listitem">
+Removed "queue" from the name of VK_STRUCTURE_TYPE_QUEUE_PRESENT_INFO_KHR
+     to be consistent with the established naming convention.
+</li><li class="listitem">
+Removed reference to the no longer existing VkObjectType enum.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 43, 2015-07-17 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added support for concurrent sharing of swapchain images across queue
+     families.
+</li><li class="listitem">
+Updated sample code based on recent changes
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 44, 2015-07-27 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Noted that support for VK_PRESENT_MODE_FIFO_KHR is required.  That is
+     ICDs may optionally support IMMEDIATE and MAILBOX, but must support
+     FIFO.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 45, 2015-08-07 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Corrected a typo in spec file (type and variable name had wrong case
+     for the imageColorSpace member of the VkSwapchainCreateInfoKHR
+     struct).
+</li><li class="listitem">
+Corrected a typo in header file (last parameter in
+     PFN_vkGetSurfacePropertiesKHR was missing "KHR" at the end of type:
+     VkSurfacePropertiesKHR).
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 46, 2015-08-20 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Renamed this extension and all of its enumerations, types, functions,
+     etc.  This makes it compliant with the proposed standard for Vulkan
+     extensions.
+</li><li class="listitem">
+Switched from "revision" to "version", including use of the
+     VK_MAKE_VERSION macro in the header file.
+</li><li class="listitem">
+Made improvements to several descriptions.
+</li><li class="listitem">
+Changed the status of several issues from PROPOSED to RESOLVED,
+     leaving no unresolved issues.
+</li><li class="listitem">
+Resolved several TODO’s, did miscellaneous cleanup, etc.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 47, 2015-08-20 (Ian Elliott—porting a 2015-07-29 change from
+   James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Moved the surface transform enums to VK_WSI_swapchain so they could
+     be re-used by VK_WSI_display.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 48, 2015-09-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Various minor cleanups.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 49, 2015-09-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Restore single-field revision number.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 50, 2015-09-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Update Example #4 to include code that illustrates how to use the
+     oldSwapchain field.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 51, 2015-09-01 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Fix example code compilation errors.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 52, 2015-09-08 (Matthaeus G. Chajdas)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Corrected a typo.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 53, 2015-09-10 (Alon Or-bach)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Removed underscore from SWAP_CHAIN left in
+     VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 54, 2015-09-11 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Described the execution and memory coherence requirements for image
+     transitions to and from VK_IMAGE_LAYOUT_PRESENT_SOURCE_KHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 55, 2015-09-11 (Ray Smith)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added errors for destroying and binding memory to presentable images
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 56, 2015-09-18 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added fence argument to vkAcquireNextImageKHR
+</li><li class="listitem">
+Added example of how to meter a CPU thread based on presentation
+     rate.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 57, 2015-09-26 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Replace VkSurfaceDescriptionKHR with VkSurfaceKHR.
+</li><li class="listitem">
+Added issue 25 with agreed resolution.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 58, 2015-09-28 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Renamed from VK_EXT_KHR_device_swapchain to VK_EXT_KHR_swapchain.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 59, 2015-09-29 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Changed vkDestroySwapchainKHR() to return void.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 60, 2015-10-01 (Jeff Vigil)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added error result VK_ERROR_SURFACE_LOST_KHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 61, 2015-10-05 (Jason Ekstrand)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added the VkCompositeAlpha enum and corresponding structure fields.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 62, 2015-10-12 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added VK_PRESENT_MODE_FIFO_RELAXED_KHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 63, 2015-10-15 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Moved surface capability queries to VK_EXT_KHR_surface.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 64, 2015-10-26 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Renamed from VK_EXT_KHR_swapchain to VK_KHR_swapchain.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 65, 2015-10-28 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added optional pResult member to VkPresentInfoKHR, so that
+     per-swapchain results can be obtained from vkQueuePresentKHR().
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 66, 2015-11-03 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added allocation callbacks to create and destroy functions.
+</li><li class="listitem">
+Updated resource transition language.
+</li><li class="listitem">
+Updated sample code.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 67, 2015-11-10 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Add reserved flags bitfield to VkSwapchainCreateInfoKHR.
+</li><li class="listitem">
+Modify naming and member ordering to match API style conventions, and so
+     the VkSwapchainCreateInfoKHR image property members mirror corresponding
+     VkImageCreateInfo members but with an <span class="emphasis"><em>image</em></span> prefix.
+</li><li class="listitem">
+Make VkPresentInfoKHR::pResults non-const; it’s an output array parameter.
+</li><li class="listitem">
+Make pPresentInfo parameter to vkQueuePresentKHR const.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 68, 2016-04-05 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Moved the "validity" include for vkAcquireNextImage to be in its proper
+     place, after the prototype and list of parameters.
+</li><li class="listitem">
+Clarified language about presentable images, including how they are
+     acquired, when applications can and can’t use them, etc.  As part of
+     this, removed language about "ownership" of presentable images, and
+     replaced it with more-consistent language about presentable images
+     being "acquired" by the application.
+</li></ul></div></li></ul></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apfs02.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="apf.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apfs04.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>E.8. VK_KHR_wayland_surface</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Vulkan 1.0.18 + WSI Extensions - A Specification" /><link rel="up" href="ape.html" title="Appendix E. Window System Integration (WSI) Extensions" /><link rel="prev" href="apes07.html" title="E.7. VK_KHR_mir_surface" /><link rel="next" href="apes09.html" title="E.9. VK_KHR_win32_surface" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="apes07.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apes09.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_vk_khr_wayland_surface"></a>E.8. VK_KHR_wayland_surface</h2></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<span class="strong"><strong>Name String</strong></span>
+</span></dt><dd>
+VK_KHR_wayland_surface
+</dd><dt><span class="term">
+<span class="strong"><strong>Extension Type</strong></span>
+</span></dt><dd>
+Instance extension
+</dd><dt><span class="term">
+<span class="strong"><strong>Registered Extension Number</strong></span>
+</span></dt><dd>
+7
+</dd><dt><span class="term">
+<span class="strong"><strong>Last Modified Date</strong></span>
+</span></dt><dd>
+11/28/2015
+</dd><dt><span class="term">
+<span class="strong"><strong>Revision</strong></span>
+</span></dt><dd>
+5
+</dd><dt><span class="term">
+<span class="strong"><strong>IP Status</strong></span>
+</span></dt><dd>
+No known IP claims.
+</dd><dt><span class="term">
+<span class="strong"><strong>Dependencies</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+This extension is written against revision 1.0 of the Vulkan API.
+</li><li class="listitem">
+This extension requires VK_KHR_surface.
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contributors</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+Patrick Doane, Blizzard
+</li><li class="listitem">
+Jason Ekstrand, Intel
+</li><li class="listitem">
+Ian Elliott, LunarG
+</li><li class="listitem">
+Courtney Goeltzenleuchter, LunarG
+</li><li class="listitem">
+Jesse Hall, Google
+</li><li class="listitem">
+James Jones, NVIDIA
+</li><li class="listitem">
+Antoine Labour, Google
+</li><li class="listitem">
+Jon Leech, Khronos
+</li><li class="listitem">
+David Mao, AMD
+</li><li class="listitem">
+Norbert Nopper, Freescale
+</li><li class="listitem">
+Alon Or-bach, Samsung
+</li><li class="listitem">
+Daniel Rakos, AMD
+</li><li class="listitem">
+Graham Sellers, AMD
+</li><li class="listitem">
+Ray Smith, ARM
+</li><li class="listitem">
+Jeff Vigil, Qualcomm
+</li><li class="listitem">
+Chia-I Wu, LunarG
+</li></ul></div></dd><dt><span class="term">
+<span class="strong"><strong>Contacts</strong></span>
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+Jesse Hall, Google
+</li><li class="listitem">
+Ian Elliott, LunarG
+</li></ul></div></dd></dl></div><p>The VK_KHR_wayland_surface extension is an instance extension.  It provides
+a mechanism to create a <code class="code">VkSurfaceKHR</code> object (defined by the
+VK_KHR_surface extension) that refers to a Wayland wl_surface, as well as a
+query to determine support for rendering to the windows desktop.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_object_types_7"></a>E.8.1. New Object Types</h3></div></div></div><p>None</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enum_constants_8"></a>E.8.2. New Enum Constants</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Extending <code class="code">VkStructureType</code>:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+<code class="code">VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR</code>
+</li></ul></div></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_enums_7"></a>E.8.3. New Enums</h3></div></div></div><p>None</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_structures_7"></a>E.8.4. New Structures</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s02.html#VkWaylandSurfaceCreateInfoKHR">VkWaylandSurfaceCreateInfoKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_new_functions_7"></a>E.8.5. New Functions</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<code class="code"><a class="link" href="ch29s02.html#vkCreateWaylandSurfaceKHR">vkCreateWaylandSurfaceKHR</a></code>
+</li><li class="listitem">
+<code class="code"><a class="link" href="ch29s04.html#vkGetPhysicalDeviceWaylandPresentationSupportKHR">vkGetPhysicalDeviceWaylandPresentationSupportKHR</a></code>
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_issues_7"></a>E.8.6. Issues</h3></div></div></div><p>1) Does Wayland need a way to query for compatibility between a particular
+   physical device and a specific Wayland display? This would be a more
+   general query than vkGetPhysicalDeviceSurfaceSupportKHR: if the Wayland-
+   specific query returned true for a (VkPhysicalDevice, struct wl_display*)
+   pair, then the physical device could be assumed to support presentation to
+   any VkSurface for surfaces on the display.</p><pre class="literallayout">RESOLVED: Yes.  vkGetPhysicalDeviceWaylandPresentationSupportKHR() was added
+to address this issue.</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_version_history_8"></a>E.8.7. Version History</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p class="simpara">
+Revision 1, 2015-09-23 (Jesse Hall)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Initial draft, based on the previous contents of VK_EXT_KHR_swapchain
+     (later renamed VK_EXT_KHR_surface).
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 2, 2015-10-02 (James Jones)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added vkGetPhysicalDeviceWaylandPresentationSupportKHR() to resolve
+     issue #1.
+</li><li class="listitem">
+Adjusted wording of issue #1 to match the agreed-upon solution.
+</li><li class="listitem">
+Renamed "window" parameters to "surface" to match Wayland conventions.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 3, 2015-10-26 (Ian Elliott)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Renamed from VK_EXT_KHR_wayland_surface to VK_KHR_wayland_surface.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 4, 2015-11-03 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Added allocation callbacks to vkCreateWaylandSurfaceKHR.
+</li></ul></div></li><li class="listitem"><p class="simpara">
+Revision 5, 2015-11-28 (Daniel Rakos)
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+Updated the surface create function to take a pCreateInfo structure.
+</li></ul></div></li></ul></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apes07.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="ape.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="apes09.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

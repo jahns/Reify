@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>14.6. Built-In Variables</title><link rel="stylesheet" type="text/css" href="config/vkspec-xhtml.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vulkan 1.0.21 + WSI Extensions - A Specification" /><link rel="up" href="ch14.html" title="Chapter 14. Shader Interfaces" /><link rel="prev" href="ch14s05.html" title="14.5. Shader Resource Interface" /><link rel="next" href="ch15.html" title="Chapter 15. Image Operations" /><script xmlns="" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            MathML: { extensions: ["content-mathml.js"] },
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script><script xmlns="" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="ch14s05.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch15.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="interfaces-builtin-variables"></a>14.6. Built-In Variables</h2></div></div></div><p>Built-in variables are accessed in shaders by declaring a variable decorated
+using a <span class="strong"><strong><code class="code">BuiltIn</code></strong></span> decoration. The meaning of each <span class="strong"><strong><code class="code">BuiltIn</code></strong></span> decoration
+is as follows. In the remainder of this section, the name of a built-in is
+used interchangeably with a term equivalent to a variable decorated with
+that particular built-in. Built-ins that represent integer values <span class="normative">can</span> be
+declared as either signed or unsigned 32-bit integers.</p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<span class="strong"><strong><code class="code">ClipDistance</code></strong></span>
+</span></dt><dd><p class="simpara">
+Variables decorated with the <span class="strong"><strong><code class="code">ClipDistance</code></strong></span> decoration provide the
+mechanism for controlling user clipping. Declared as an array, the i<sup>th</sup>
+element of the variable decorated as <span class="strong"><strong><code class="code">ClipDistance</code></strong></span> specifies a clip
+distance for plane i. A clip distance of 0 means the vertex is on the plane,
+a positive distance means the vertex is inside the clip half-space, and a
+negative distance means the point is outside the clip half-space.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">ClipDistance</code></strong></span> array is explicitly sized by the shader.</p><p class="simpara">The <span class="strong"><strong><code class="code">ClipDistance</code></strong></span> decoration <span class="normative">can</span> be applied to array inputs in
+tessellation control, tessellation evaluation and geometry shader stages
+which will contain the values written by the previous stage. It <span class="normative">can</span> be
+applied to outputs in vertex, tessellation evaluation and geometry shaders.
+In the last vertex processing stage, these values will be linearly
+interpolated across the primitive and the portion of the primitive with
+interpolated distances less than 0 will be considered outside the clip
+volume.</p><p class="simpara">In the fragment shader, the <span class="strong"><strong><code class="code">ClipDistance</code></strong></span> decoration <span class="normative">can</span> be applied to
+an array of floating-point input variables and contains the linearly
+interpolated values described above.</p><p class="simpara"><span class="strong"><strong><code class="code">ClipDistance</code></strong></span> <span class="normative">must not</span> be used in compute shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">ClipDistance</code></strong></span> <span class="normative">must</span> be declared as an array of 32-bit floating-point
+values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">CullDistance</code></strong></span>
+</span></dt><dd><p class="simpara">
+A variable decorated as <span class="strong"><strong><code class="code">CullDistance</code></strong></span> provides a mechanism for a vertex
+processing stage to reject an entire primitive. <span class="strong"><strong><code class="code">CullDistance</code></strong></span> <span class="normative">can</span> be
+applied to an array variable. If any member of this array is assigned a
+negative value for all vertices belonging to a primitive, then the primitive
+is discarded before rasterization. <span class="strong"><strong><code class="code">CullDistance</code></strong></span> <span class="normative">can</span> be applied to an
+output variable in the last vertex processing stage (vertex, tessellation
+evaluation or geometry shader).
+</p><p class="simpara">If applied to an input variable, that variable will contain the
+corresponding output in the previous shader stage. <span class="strong"><strong><code class="code">CullDistance</code></strong></span>
+<span class="normative">must not</span> be applied to an input in the vertex shader or to an output in the
+fragment shader, and <span class="normative">must not</span> be used in compute shaders.</p><p class="simpara">In fragment shaders, the values of the <span class="strong"><strong><code class="code">CullDistance</code></strong></span> array are linearly
+interpolated across each primitive.</p><p class="simpara"><span class="strong"><strong><code class="code">CullDistance</code></strong></span> <span class="normative">must</span> be declared as an array of 32-bit floating-point
+values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">FragCoord</code></strong></span>
+</span></dt><dd><p class="simpara">
+This variable contains the framebuffer coordinate
+<span class="inlinemediaobject"><span class="phrase">
+$(x,y,z,\frac{1}{w})$
+</span></span> of the fragment being processed. The (x,y)
+coordinate (0,0) is the upper left corner of the upper left pixel in the
+framebuffer. The x and y components of <span class="strong"><strong><code class="code">FragCoord</code></strong></span> reflect
+the location of the center of the pixel
+(<span class="inlinemediaobject"><span class="phrase">
+$(0.5,0.5)$
+</span></span>) when sample shading is not enabled, and the
+location of the sample corresponding to the shader invocation when using
+sample shading.
+</p><p class="simpara">The z component of <span class="strong"><strong><code class="code">FragCoord</code></strong></span> is the interpolated depth value of the
+primitive, and the w component is the interpolated
+<span class="inlinemediaobject"><span class="phrase">
+$\frac{1}{w}$
+</span></span>.</p><p class="simpara">The <span class="strong"><strong><code class="code">FragCoord</code></strong></span> decoration <span class="normative">must</span> be used only within fragment shaders. The
+<span class="strong"><strong><code class="code">Centroid</code></strong></span> interpolation decoration is ignored on <span class="strong"><strong><code class="code">FragCoord</code></strong></span>.</p><p class="simpara"><span class="strong"><strong><code class="code">FragCoord</code></strong></span> <span class="normative">must</span> be declared as a four-component vector of 32-bit
+floating-point values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">FragDepth</code></strong></span>
+</span></dt><dd><p class="simpara">
+Writing to an output variable decorated with <span class="strong"><strong><code class="code">FragDepth</code></strong></span> from the
+fragment shader establishes a new depth value for all samples covered by the
+fragment. This value will be used for depth testing and, if the depth test
+passes, any subsequent write to the depth/stencil attachment. To write to
+<span class="strong"><strong><code class="code">FragDepth</code></strong></span>, a shader <span class="normative">must</span> declare the <span class="strong"><strong><code class="code">DepthReplacing</code></strong></span> execution
+mode. If a shader declares the <span class="strong"><strong><code class="code">DepthReplacing</code></strong></span> execution mode and there
+is an execution path through the shader that does not set <span class="strong"><strong><code class="code">FragDepth</code></strong></span>,
+then the fragment’s depth value is undefined for executions of the shader
+that take that path.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">FragDepth</code></strong></span> decoration <span class="normative">must</span> be used only within fragment shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">FragDepth</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit floating-point value.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">FrontFacing</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">FrontFacing</code></strong></span> decoration <span class="normative">can</span> be applied to an input variable in the
+fragment shader. This variable is non-zero if the current
+fragment is considered to be part of a
+<a class="link" href="ch24s06.html#primsrast-polygons-basic" title="24.6.1. Basic Polygon Rasterization">front-facing</a> primitive and is zero if the
+fragment is considered to be part of a back-facing primitive.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">FrontFacing</code></strong></span> decoration is not available to shader stages other than
+fragment.</p><p class="simpara"><span class="strong"><strong><code class="code">FrontFacing</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit integer.</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note: Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>In GLSL, <span class="strong"><strong><code class="code">gl_FrontFacing</code></strong></span> is declared as a <span class="strong"><strong><code class="code">bool</code></strong></span>. To achieve
+similar semantics in SPIR-V, a variable of <span class="strong"><strong><code class="code">OpTypeBool</code></strong></span> <span class="normative">can</span> be declared
+and initialized as the result of the <span class="strong"><strong><code class="code">OpINotEqual</code></strong></span> operation with the
+operands of the <span class="strong"><strong><code class="code">FrontFacing</code></strong></span> variable and an appropriately typed
+constant zero.</p></td></tr></table></div></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">GlobalInvocationId</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">GlobalInvocationId</code></strong></span> built-in decoration <span class="normative">can</span> be applied to a variable
+that represents the location of the current invocation within the global
+workgroup. Each component is equal to the index of the local workgroup
+multiplied by the size of the local workgroup plus <span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span>.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">GlobalInvocationId</code></strong></span> decoration <span class="normative">must</span> be used only within compute
+shaders.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">GlobalInvocationId</code></strong></span> <span class="normative">must</span> be declared using the
+input storage class.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">GlobalInvocationId</code></strong></span> <span class="normative">must</span> be declared as a
+three-component vector of 32-bit unsigned integers.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">HelperInvocation</code></strong></span>
+</span></dt><dd><p class="simpara">
+This variable is non-zero if the fragment being shaded is a helper
+invocation and zero otherwise. A helper invocation is an invocation of
+the shader that is produced to satisfy internal requirements such as the
+generation of derivatives.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">HelperInvocation</code></strong></span> decoration <span class="normative">must</span> be used only within fragment
+shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">HelperInvocation</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit integer.</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note: Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>It is very likely that a helper invocation will have a value of
+<span class="strong"><strong><code class="code">SampleMask</code></strong></span> fragment shader input value that is zero.</p></td></tr></table></div><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note: Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>In GLSL, <span class="strong"><strong><code class="code">HelperInvocation</code></strong></span> is declared as a <span class="strong"><strong><code class="code">bool</code></strong></span>. To achieve
+similar semantics in SPIR-V, a variable of <span class="strong"><strong><code class="code">OpTypeBool</code></strong></span> <span class="normative">can</span> be declared
+and initialized as the result of the <span class="strong"><strong><code class="code">OpINotEqual</code></strong></span> operation with the
+operands of the <span class="strong"><strong><code class="code">HelperInvocation</code></strong></span> variable and an appropriately typed
+constant zero.</p></td></tr></table></div></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">InvocationId</code></strong></span>
+</span></dt><dd><p class="simpara">
+In a geometry shader, an input variable decorated with the <span class="strong"><strong><code class="code">InvocationId</code></strong></span>
+decoration contains the index of the current shader invocation, which ranges
+from zero to the number of <a class="link" href="ch22s03.html" title="22.3. Multiple Invocations of Geometry Shaders">instances</a> declared in
+the shader minus one. If the instance count of the geometry shader is one or
+is not specified, then <span class="strong"><strong><code class="code">InvocationId</code></strong></span> will be zero.
+</p><p class="simpara">In tessellation control shaders, and input variable decorated with the
+<span class="strong"><strong><code class="code">InvocationId</code></strong></span> decoration contains the index of the output patch vertex
+assigned to the tessellation control shader invocation.</p><p class="simpara">The <span class="strong"><strong><code class="code">InvocationId</code></strong></span> decoration <span class="normative">must not</span> be used in vertex, tessellation
+evaluation, fragment, or compute shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">InvocationId</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">InstanceIndex</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">InstanceIndex</code></strong></span> decoration <span class="normative">can</span> be applied to a vertex shader input
+which will be filled with the index of the instance that is being processed
+by the current vertex shader invocation. <span class="strong"><strong><code class="code">InstanceIndex</code></strong></span>
+begins at the <em class="parameter"><code>firstInstance</code></em> parameter to <code class="code"><a class="link" href="ch19s02.html#vkCmdDraw">vkCmdDraw</a></code>
+or <code class="code"><a class="link" href="ch19s02.html#vkCmdDrawIndexed">vkCmdDrawIndexed</a></code> or at the <em class="parameter"><code>firstInstance</code></em> member
+of a structure consumed by <code class="code"><a class="link" href="ch19s02.html#vkCmdDrawIndirect">vkCmdDrawIndirect</a></code> or
+<code class="code"><a class="link" href="ch19s02.html#vkCmdDrawIndexedIndirect">vkCmdDrawIndexedIndirect</a></code>.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">InstanceIndex</code></strong></span> decoration <span class="normative">must not</span> be used in any shader stage other
+than vertex.</p><p class="simpara"><span class="strong"><strong><code class="code">InstanceIndex</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">Layer</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">Layer</code></strong></span> decoration <span class="normative">can</span> be applied to an output variable in the
+geometry shader that is written with the framebuffer layer index to which
+the primitive produced by the geometry shader will be directed. If a
+geometry shader entry point’s interface does not include an output variable
+decorated with <span class="strong"><strong><code class="code">Layer</code></strong></span>, then the first layer is used. If a geometry
+shader entry point’s interface includes an output variable decorated with
+<span class="strong"><strong><code class="code">Layer</code></strong></span>, it <span class="normative">must</span> write the same value to <span class="strong"><strong><code class="code">Layer</code></strong></span> for all output
+vertices of a given primitive. When used in a fragment shader, an input
+variable decorated with <span class="strong"><strong><code class="code">Layer</code></strong></span> contains the layer index of the primitive
+that the fragment invocation belongs to.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">Layer</code></strong></span> decoration <span class="normative">must</span> be used only within geometry and fragment
+shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">Layer</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span> built-in decoration <span class="normative">can</span> be applied to a variable
+that represents the location of the current compute shader invocation within
+the local workgroup. Each component ranges from zero through to the size of the
+workgroup in that dimension minus one.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span> decoration <span class="normative">must</span> be used only within compute
+shaders.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span> <span class="normative">must</span> be declared using the
+input storage class.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span> <span class="normative">must</span> be declared as a
+three-component vector of 32-bit unsigned integers.</p></dd></dl></div><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note: Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>If the size of the workgroup in a particular dimension is one, then the
+<span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span> in that dimension will be zero. If the workgroup is
+effectively two-dimensional, then <span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span>.z will be zero.
+If the workgroup is effectively one-dimensional, then both
+<span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span>.y and <span class="strong"><strong><code class="code">LocalInvocationId</code></strong></span>.z will be zero.</p></td></tr></table></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<span class="strong"><strong><code class="code">NumWorkgroups</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">NumWorkgroups</code></strong></span> built-in decoration <span class="normative">can</span> be applied to a variable that
+represents the number of local workgroups that are part of the dispatch that the
+invocation belongs to. Each component is equal to the values of the parameters
+passed into <code class="code"><a class="link" href="ch27.html#vkCmdDispatch">vkCmdDispatch</a></code> or read from the <code class="code">VkDispatchIndirectCommand</code>
+structure read through a call to <code class="code"><a class="link" href="ch27.html#vkCmdDispatchIndirect">vkCmdDispatchIndirect</a></code>.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">NumWorkgroups</code></strong></span> decoration <span class="normative">must</span> be used only within compute shaders.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">NumWorkgroups</code></strong></span> <span class="normative">must</span> be declared using the input
+storage class.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">NumWorkgroups</code></strong></span> <span class="normative">must</span> be declared as a
+three-component vector of 32-bit integers.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">PatchVertices</code></strong></span>
+</span></dt><dd><p class="simpara">
+An input variable decorated with <span class="strong"><strong><code class="code">PatchVertices</code></strong></span> in the tessellation
+control or evaluation shader is an integer specifying the number of
+vertices in the input patch being processed by the shader. A single
+tessellation control or evaluation shader <span class="normative">can</span> read patches of differing
+sizes, so the <span class="strong"><strong><code class="code">PatchVertices</code></strong></span> variable <span class="normative">may</span> differ between patches.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">PatchVertices</code></strong></span> decoration <span class="normative">must</span> be used only within tessellation
+control and evaluation shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">PatchVertices</code></strong></span> <span class="normative">must</span> be declared as scalar 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">PointCoord</code></strong></span>
+</span></dt><dd><p class="simpara">
+During point rasterization, a variable decorated with <span class="strong"><strong><code class="code">PointCoord</code></strong></span>
+contains the coordinate of the current fragment within the point being
+rasterized, normalized to the size of the point with origin in the upper
+left corner of the point, as described in <a class="link" href="ch24s04.html#primsrast-points-basic" title="24.4.1. Basic Point Rasterization">Basic Point Rasterization</a>. If the primitive the fragment shader invocation
+belongs to is not a point, then <span class="strong"><strong><code class="code">PointCoord</code></strong></span> is undefined.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">PointCoord</code></strong></span> decoration <span class="normative">must</span> be used only within fragment shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">PointCoord</code></strong></span> <span class="normative">must</span> be declared as two-component vector of 32-bit
+floating-point values.</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note: Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>Depending on how the point is rasterized, <span class="strong"><strong><code class="code">PointCoord</code></strong></span> <span class="normative">may</span> never
+reach (0,0) or (1,1).</p></td></tr></table></div></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">PointSize</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">PointSize</code></strong></span> built-in decoration is used to pass the size of point
+primitives between shader stages. It <span class="normative">can</span> be applied to inputs to
+tessellation control and geometry shaders. It <span class="normative">can</span> be applied to output
+variables in vertex, tessellation evaluation and geometry shaders. The value
+written to the variable decorated as <span class="strong"><strong><code class="code">PointSize</code></strong></span> by the last vertex
+processing stage in the pipeline is used as the framebuffer space size of
+points produced by rasterization. As an input, it reflects the value written
+to the output decorated with <span class="strong"><strong><code class="code">PointSize</code></strong></span> in the previous shader stage.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">PointSize</code></strong></span> decoration <span class="normative">must not</span> be applied to inputs in the vertex
+shader and <span class="normative">must not</span> be used in fragment or compute shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">PointSize</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit floating-point value.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">Position</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">Position</code></strong></span> built-in decoration <span class="normative">can</span> be used on variables declared as
+input to tessellation control, tessellation evaluation and geometry shaders.
+It <span class="normative">can</span> be used on variables declared as outputs in the vertex, tessellation
+control, tessellation evaluation and geometry shaders. As an input, it
+contains the data written to the output variable decorated as <span class="strong"><strong><code class="code">Position</code></strong></span>
+in the previous shader stage. As an output, the data written to a variable
+decorated as <span class="strong"><strong><code class="code">Position</code></strong></span> is passed to the next shader stage. In the last
+vertex processing stage, the output position is used in subsequent primitive
+assembly, clipping and rasterization operations.
+</p><p class="simpara">Variables decorated as <span class="strong"><strong><code class="code">Position</code></strong></span> <span class="normative">must not</span> be used as inputs in vertex
+shaders and <span class="normative">must not</span> be used in fragment or compute shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">Position</code></strong></span> <span class="normative">must</span> be declared as a four-component vector of 32-bit
+floating-point values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">PrimitiveId</code></strong></span>
+</span></dt><dd><p class="simpara">
+When the <span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> decoration is applied to an input variable in the
+tessellation control or tessellation evaluation shader, it will be filled
+with the index of the patch within the current set of rendering primitives
+that corresponds to the shader invocation.
+</p><p class="simpara">When the <span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> decoration is applied to an input variable in the
+geometry shader, it will be filled with the number of primitives presented
+as input to the geometry shader since the current set of rendering
+primitives was started. When <span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> is applied to an output in the
+geometry shader, the resulting value is seen as an input to the fragment
+shader.</p><p class="simpara">When <span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> is applied to an input in the fragment shader, it will
+be filled with the primitive index written by the geometry shader if a
+geometry shader is present, or with the value that would have been presented
+as input to the geometry shader had it been present. If a geometry shader is
+present and the fragment shader reads from an input variable decorated with
+<span class="strong"><strong><code class="code">PrimitiveId</code></strong></span>, then the geometry shader <span class="normative">must</span> write to an output variable
+decorated with <span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> in all execution paths; otherwise the
+<span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> input in the fragment shader is undefined.</p><p class="simpara">The <span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> decoration <span class="normative">must not</span> be used in vertex or compute
+shaders. <span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> <span class="normative">must not</span> be used on output variables in
+tessellation control, tessellation evaluation, or fragment shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">PrimitiveId</code></strong></span> <span class="normative">must</span> be declared as scalar 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">SampleId</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">SampleId</code></strong></span> decoration <span class="normative">can</span> be applied to an integer input variable in
+the fragment shader. This variable will contain the zero-based index of the
+sample the invocation corresponds to. <span class="strong"><strong><code class="code">SampleId</code></strong></span> ranges from
+zero to the number of samples in the framebuffer minus one. If a fragment
+shader entry point’s interface includes an input variable decorated with
+<span class="strong"><strong><code class="code">SampleId</code></strong></span>, per-sample shading is enabled for draws that use that
+fragment shader.
+</p><p class="simpara"><span class="strong"><strong><code class="code">SampleId</code></strong></span> is not available in shader stages other than fragment.</p><p class="simpara"><span class="strong"><strong><code class="code">SampleId</code></strong></span> <span class="normative">must</span> be declared as a scalar 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">SampleMask</code></strong></span>
+</span></dt><dd><p class="simpara">
+A fragment input variable decorated with <span class="strong"><strong><code class="code">SampleMask</code></strong></span> will contain a
+bitmask of the set of samples covered by the primitive generating the
+fragment during rasterization. It has a sample bit set if and only if the
+sample is considered covered for this fragment shader invocation.
+<span class="strong"><strong><code class="code">SampleMask</code></strong></span>[] is an array of integers. Bits are mapped to samples in a
+manner where bit B of mask M (<code class="literal">SampleMask[M]</code>) corresponds to sample
+<span class="inlinemediaobject"><span class="phrase">
+$32 \times M + B$
+</span></span>.
+</p><p class="simpara">When state specifies multiple fragment shader invocations for a given
+fragment, the sample mask for any single fragment shader invocation
+specifies the subset of the covered samples for the fragment that correspond
+to the invocation. In this case, the bit corresponding to each covered
+sample will be set in exactly one fragment shader invocation.</p><p class="simpara">A fragment output variable decorated with <span class="strong"><strong><code class="code">SampleMask</code></strong></span> is an array of
+integers forming a bit array in a manner similar an input variable decorated
+with <span class="strong"><strong><code class="code">SampleMask</code></strong></span>, but where each bit represents coverage as computed by
+the shader. Modifying the sample mask by writing zero to a bit of
+<span class="strong"><strong><code class="code">SampleMask</code></strong></span> causes the sample to be considered uncovered. However,
+setting sample mask bits to one will never enable samples not covered by the
+original primitive. If the fragment shader is being evaluated at any
+frequency other than per-fragment, bits of the sample mask not corresponding
+to the current fragment shader invocation are ignored. This array <span class="normative">must</span> be
+sized in the fragment shader either implicitly or explicitly, to be no
+larger than the implementation-dependent maximum sample-mask (as an array of
+32-bit elements), determined by the maximum number of samples. If a fragment
+shader entry point’s interface includes an output variable decorated with
+<span class="strong"><strong><code class="code">SampleMask</code></strong></span>, the sample mask will be undefined for any array elements of
+any fragment shader invocations that fail to assign a value. If a fragment
+shader entry point’s interface does not include an output variable decorated
+with <span class="strong"><strong><code class="code">SampleMask</code></strong></span>, the sample mask has no effect on the processing of a
+fragment.</p><p class="simpara">The <span class="strong"><strong><code class="code">SampleMask</code></strong></span> decoration <span class="normative">must</span> be used only within fragment shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">SampleMask</code></strong></span> <span class="normative">must</span> be declared as an array of 32-bit integers.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">SamplePosition</code></strong></span>
+</span></dt><dd><p class="simpara">
+This variable contains the sub-pixel position of the sample being shaded.
+The top left of the pixel is considered to be at coordinate (0,0) and the
+bottom right of the pixel is considered to be at coordinate (1,1). If a
+fragment shader entry point’s interface includes an input variable decorated
+with <span class="strong"><strong><code class="code">SamplePosition</code></strong></span>, per-sample shading is enabled for draws that use
+that fragment shader.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">SamplePosition</code></strong></span> decoration <span class="normative">must</span> be used only within fragment shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">SamplePosition</code></strong></span> <span class="normative">must</span> be declared as a two-component vector of
+floating-point values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">TessCoord</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">TessCoord</code></strong></span> is applied to an input variable in tessellation
+evaluation shaders and specifies the three-dimensional (u,v,w) barycentric
+coordinate of the tessellated vertex within the patch. u, v,
+and w are in the range <span class="inlinemediaobject"><span class="phrase">
+$[0,1]$
+</span></span> and vary linearly across the
+primitive being subdivided. For the tessellation modes of <span class="strong"><strong><code class="code">Quads</code></strong></span> or
+<span class="strong"><strong><code class="code">IsoLines</code></strong></span>, the third component is always zero.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">TessCoord</code></strong></span> decoration <span class="normative">must</span> be used only within tessellation
+evaluation shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">TessCoord</code></strong></span> <span class="normative">must</span> be declared as three-component vector of 32-bit
+floating-point values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">TessLevelOuter</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">TessLevelOuter</code></strong></span> decoration is used in tessellation control
+shaders to decorate an output variable to contain the outer tessellation
+factors for the resulting patch. These values are used by the tessellator
+to control primitive tessellation and <span class="normative">can</span> be read by
+tessellation evaluation shaders. When applied to an input variable in a
+tessellation evaluation shader, the shader <span class="normative">can</span> read the values written by
+the tessellation control shader.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">TessLevelOuter</code></strong></span> decoration <span class="normative">must</span> be used only within
+tessellation control and evaluation shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">TessLevelOuter</code></strong></span> <span class="normative">must</span> be declared as an array of size four,
+containing 32-bit floating-point values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">TessLevelInner</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">TessLevelInner</code></strong></span> decoration is used in tessellation control
+shaders to decorate an output variable to contain the inner tessellation
+factors for the resulting patch. These values are used by the tessellator to
+control primitive tessellation and <span class="normative">can</span> be read by
+tessellation evaluation shaders. When applied to an input variable in a
+tessellation evaluation shader, the shader <span class="normative">can</span> read the values written by
+the tessellation control shader.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">TessLevelInner</code></strong></span> decoration <span class="normative">must</span> be used only within
+tessellation control and evaluation shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">TessLevelInner</code></strong></span> <span class="normative">must</span> be declared as an array of size two,
+containing 32-bit floating-point values.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">VertexIndex</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">VertexIndex</code></strong></span> decoration <span class="normative">can</span> be applied to a vertex shader input
+which will be filled with the index of the vertex that is being processed by
+the current vertex shader invocation. For non-indexed draws,
+this variable begins at the <em class="parameter"><code>firstVertex</code></em> parameter to
+<code class="code"><a class="link" href="ch19s02.html#vkCmdDraw">vkCmdDraw</a></code> or the <em class="parameter"><code>firstVertex</code></em> member of a structure consumed by
+<code class="code"><a class="link" href="ch19s02.html#vkCmdDrawIndirect">vkCmdDrawIndirect</a></code> and increments by one for each vertex in the draw.
+For indexed draws, its value is the content of the index buffer for the
+vertex plus the <em class="parameter"><code>vertexOffset</code></em> parameter to
+<code class="code"><a class="link" href="ch19s02.html#vkCmdDrawIndexed">vkCmdDrawIndexed</a></code> or the <em class="parameter"><code>vertexOffset</code></em> member of the structure
+consumed by <code class="code"><a class="link" href="ch19s02.html#vkCmdDrawIndexedIndirect">vkCmdDrawIndexedIndirect</a></code>.
+</p><p class="simpara"><span class="strong"><strong><code class="code">VertexIndex</code></strong></span> starts at the same starting value for each instance.</p><p class="simpara">The <span class="strong"><strong><code class="code">VertexIndex</code></strong></span> decoration <span class="normative">must</span> be used only within vertex shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">VertexIndex</code></strong></span> <span class="normative">must</span> be declared as a 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">ViewportIndex</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">ViewportIndex</code></strong></span> decoration <span class="normative">can</span> be applied to an output variable in
+the geometry shader that is written with the viewport index to which the
+primitive produced by the geometry shader will be directed. The selected
+viewport index is used to select the viewport transform and scissor
+rectangle. If a geometry shader entry point’s interface does not include an
+output variable decorated with <span class="strong"><strong><code class="code">ViewportIndex</code></strong></span>, then the first viewport
+is used. If a geometry shader entry point’s interface includes an output
+variable decorated with <span class="strong"><strong><code class="code">ViewportIndex</code></strong></span>, it <span class="normative">must</span> write the same value to
+<span class="strong"><strong><code class="code">ViewportIndex</code></strong></span> for all output vertices of a given primitive. When used
+in a fragment shader, an input variable decorated with <span class="strong"><strong><code class="code">ViewportIndex</code></strong></span>
+contains the viewport index of the primitive that the fragment invocation
+belongs to.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">ViewportIndex</code></strong></span> decoration <span class="normative">must</span> be used only within geometry and
+fragment shaders.</p><p class="simpara"><span class="strong"><strong><code class="code">ViewportIndex</code></strong></span> <span class="normative">must</span> be declared as a 32-bit integer.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">WorkgroupId</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">WorkgroupId</code></strong></span> built-in decoration <span class="normative">can</span> be applied to a variable that
+represents the global workgroup that the current invocation is a member of.
+Each component ranges from zero to the values of the parameters passed into
+<code class="code"><a class="link" href="ch27.html#vkCmdDispatch">vkCmdDispatch</a></code> or read from the <code class="code">VkDispatchIndirectCommand</code> structure
+read through a call to <code class="code"><a class="link" href="ch27.html#vkCmdDispatchIndirect">vkCmdDispatchIndirect</a></code>.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">WorkgroupId</code></strong></span> decoration <span class="normative">must</span> be used only within compute shaders.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">WorkgroupId</code></strong></span> <span class="normative">must</span> be declared using the input
+storage class.</p><p class="simpara">The variable decorated with <span class="strong"><strong><code class="code">WorkgroupId</code></strong></span> <span class="normative">must</span> be declared as a
+three-component vector of 32-bit unsigned integers.</p></dd><dt><span class="term">
+<span class="strong"><strong><code class="code">WorkgroupSize</code></strong></span>
+</span></dt><dd><p class="simpara">
+The <span class="strong"><strong><code class="code">WorkgroupSize</code></strong></span> built-in decoration <span class="normative">can</span> be applied to an object that
+represents the dimensions of a local workgroup. If an object is decorated with
+the <span class="strong"><strong><code class="code">WorkgroupSize</code></strong></span> decoration, this <span class="normative">must</span> take precedence over any execution
+mode set for <span class="strong"><strong><code class="code">LocalSize</code></strong></span>.
+</p><p class="simpara">The <span class="strong"><strong><code class="code">WorkgroupSize</code></strong></span> decoration <span class="normative">must</span> be used only within compute shaders.</p><p class="simpara">The object decorated with <span class="strong"><strong><code class="code">WorkgroupSize</code></strong></span> <span class="normative">must</span> be a specialization constant
+or a constant.</p><p class="simpara">The object decorated with <span class="strong"><strong><code class="code">WorkgroupSize</code></strong></span> <span class="normative">must</span> be declared as a
+three-component vector of 32-bit unsigned integers.</p></dd></dl></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch14s05.html"><img src="images/icons/prev.png" alt="Prev" /></a> </td><td width="20%" align="center"><a accesskey="u" href="ch14.html"><img src="images/icons/up.png" alt="Up" /></a></td><td width="40%" align="right"> <a accesskey="n" href="ch15.html"><img src="images/icons/next.png" alt="Next" /></a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html"><img src="images/icons/home.png" alt="Home" /></a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

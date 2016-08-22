@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="icon" href="vulkan_lunarg_icon.png">
+<link rel="stylesheet" href="github-markdown.css">
+<style>
+    body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+</style>
+</head>
+<body>
+<article class="markdown-body">
+<h1>
+<a id="user-content-vulkan-sdk-for-windows-release-notes" class="anchor" href="#user-content-vulkan-sdk-for-windows-release-notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vulkan SDK for Windows Release Notes</h1>
+
+<p><a name="user-content-vsdkrel-1.0.21"></a></p>
+
+<h2>
+<a id="user-content-vulkan-sdk-10211-release-notes" class="anchor" href="#user-content-vulkan-sdk-10211-release-notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vulkan SDK 1.0.21.1 Release Notes</h2>
+
+<h5>
+<a id="user-content-july-22-2016" class="anchor" href="#user-content-july-22-2016" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>July 22, 2016</h5>
+
+<p>Adding 2 commits to membarriers sample to fix reported problems</p>
+
+<h3>
+<a id="user-content-last-commits" class="anchor" href="#user-content-last-commits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Last Commits</h3>
+
+<ul>
+<li>VulkanSamples: 769f8c8455be6  membarriers - fix pipeline stages for barriers</li>
+</ul>
+
+<h2>
+<a id="user-content-vulkan-sdk-10210-release-notes" class="anchor" href="#user-content-vulkan-sdk-10210-release-notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vulkan SDK 1.0.21.0 Release Notes</h2>
+
+<h5>
+<a id="user-content-version-10210-for-windows" class="anchor" href="#user-content-version-10210-for-windows" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Version 1.0.21.0 for Windows</h5>
+
+<h6>
+<a id="user-content-july-21-2016" class="anchor" href="#user-content-july-21-2016" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>July 21, 2016</h6>
+
+<p>This SDK supports Vulkan API revision 1.0.21.  The prior SDK supported Vulkan API revision 1.0.17.</p>
+
+<p><strong>Device layers are now deprecated!</strong> Any device layers must be converted to a layer that is queried and enabled
+at vkCreateInstance. vkEnumerateDeviceLayerProperties is deprecated.</p>
+
+<h3>
+<a id="user-content-overview-of-new-features-in-sdk-10210" class="anchor" href="#user-content-overview-of-new-features-in-sdk-10210" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview of new features in SDK 1.0.21.0</h3>
+
+<ul>
+<li>Memory Barrier Vulkan Sample demonstrating correct use of memory barriers between write/read operations</li>
+<li>Device Limits layer validation moved into the core_validation and parameter_validation layers for improved performance, maintainability and clarity</li>
+<li>Improved coverage and utility in layer validation tests</li>
+<li>Performance improvements to Threading layer</li>
+<li>Additional structural and architectural layer improvements and cleanup to core_validation, including improved object lifetime tracking and performance improvements</li>
+<li>Scores of bugfixes, new validation checks, and feature additions</li>
+</ul>
+
+<p>This version of the SDK components are based on the following specifications and source code repositories:</p>
+
+<ul>
+<li><p><a href="https://www.khronos.org/registry/vulkan" TARGET="_blank"><strong>Vulkan Specification including extensions</strong></a></p></li>
+<li><p><a href="https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/tree/sdk-1.0.21" TARGET="_blank"><strong>Vulkan Loader and Validation</strong> version 1.0.21 of vulkan.h</a></p></li>
+<li><p><a href="https://www.khronos.org/registry/spir-v/" TARGET="_blank"><strong>SPIR-V</strong> version 1.1</a></p></li>
+<li>
+<p><a href="https://github.com/KhronosGroup/glslang/commit/e4821e43c86d97bcf65fb07c1f70471b7102978d" TARGET="_blank"><strong>Glslang library and tools</strong></a></p>
+
+<ul>
+<li>Note that the <code>update_external_sources.bat</code> script applies a patch to backout glslang <a href="https://github.com/KhronosGroup/glslang/commit/a5c33d6ffb34ccede5b233bc724c907166b6e479" TARGET="_blank">a5c33d6ffb34ccede5b233bc724c907166b6e479</a> to remove a fix that is incompatible with many IHV drivers in the field.</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/KhronosGroup/SPIRV-Tools/commit/1a9385bbd0e6eae188c14302cf37c415ecc8b698" TARGET="_blank"><strong>SPIR-V tools</strong></a></p></li>
+<li><p><a href="https://github.com/LunarG/VulkanTools/tree/sdk-1.0.21" TARGET="_blank"><strong>Vulkan Tools</strong></a></p></li>
+<li><p><a href="https://github.com/LunarG/VulkanSamples/tree/sdk-1.0.21" TARGET="_blank"><strong>Vulkan Samples</strong></a></p></li>
+</ul>
+
+<h3>
+<a id="user-content-last-commits-1" class="anchor" href="#user-content-last-commits-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Last Commits</h3>
+
+<ul>
+<li>LoaderAndValidationLayers:    97e3b677d9681  loader: Clean up some things in the MD file</li>
+<li>VulkanTools:                  3bc2d55828e46  Merge branch 'trunk'</li>
+<li>VulkanSamples:                deecd54f5e5b7  api-samples: Make "this error is expected" more visible</li>
+</ul>
+
+<h3>
+<a id="user-content-known-issues" class="anchor" href="#user-content-known-issues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Known Issues</h3>
+
+<ul>
+<li>This WSI extension is not supported: VK_KHR_display_swapchain</li>
+</ul>
+
+<p>Vulkan-LoaderAndValidationLayers Issues:</p>
+
+<ul>
+<li>github #770 Update unique_objects FreeDescriptorSets() to erase map entries</li>
+<li>github #746 windowsRuntimeInstaller fails on Windows in Safe Mode</li>
+<li>github #743 Loader: Usage of instance-level extension functions leads to stack corruption &amp; a crash under x64 Windows</li>
+<li>github #722 False-positive in CmdCopyQueryPoolResults </li>
+<li>github #719 OBJTRACK, THREADING : DestroyCommandPool null pointer</li>
+<li>github #706 Shader Validation and VK_NV_glsl_shader extension</li>
+<li>github #650 Core_validation: ValidateCmdBufImageLayouts() should be treating D views of DS images as DS image views</li>
+<li>github #621 IMAGE: "unsupported format" error may be too strict </li>
+<li>github #615 unique_objects layer doesn't use the correct wsi extension enable flags</li>
+<li>github #605 vkCmdResolveImage generates invalid "Cannot read invalid memory..., please fill..." message </li>
+<li>github #462 Validation for pCreateInfo structures does not report actual index (attachments, vertex input state)</li>
+<li>github #403 [CTS] Object tracker maps need to be per device</li>
+<li>github #335 Undefined memory tracking is not fine grained enough</li>
+<li>github #328 Validation layer reports errors if memory object alias same memory</li>
+<li>github #321 vkAllocateMemory not handling null pointers</li>
+<li>github #306 race on globalLockInitialized: it is reset after releasing the mutex lock</li>
+<li>github #282 layer_validation_test failures</li>
+<li>github #281 Cube -- validate with screenshot crashes on AMD/Intel Win 10</li>
+<li>github #280 Cube resize stops updating image on Win 10 Intel driver</li>
+<li>github #279 Samples validation errors on AMD driver</li>
+<li>github #278 tri resize broken on AMD driver</li>
+<li>github #277 render tests --show-images doesn't work</li>
+<li>github #276 render tests have validation errors</li>
+<li>github #128 Memory layer: "Cannot read invalid memory X, please fill the memory before using" is incorrectly reported</li>
+<li>github #90 loader: Add support for WSI VK_KHR_display_swapchain extension</li>
+</ul>
+
+<p>LunarXchange Issues:</p>
+
+<ul>
+<li>LX #568 Link to LunarG/VulkanTools github issue #63</li>
+<li>LX #567 vkGetPhysicalDeviceSurfaceCapabilitiesKHR VK_ERROR_SURFACE_LOST_KHR</li>
+<li>LX #566 Bad scaling of Lunar Xchange Docs</li>
+<li>LX #562 Potential issue with finalLayout in RenderPass</li>
+<li>LX #560 vkAllocateMemory: value of pAllocateInfo-&gt;pNext must be NULL</li>
+<li>LX #305 [1.0.1.1] Validation draw state layer too slow for vkGetQueryPoolResults()</li>
+</ul>
+
+<p>VulkanTools/VulkanSamples issues:</p>
+
+<ul>
+<li>github #33 [VulkanTools] The trace file generated on 32bit system cannot be read by 64bit traceviewer</li>
+<li>github #42 [VulkanTools] miss alignment for some arm cpu vfp load instructions</li>
+<li>github #45 [VulkanTools] Examples at <a href="https://github.com/McNopper/Vulkan" TARGET="_blank">https://github.com/McNopper/Vulkan</a> don't trace/replay</li>
+<li>github #50 [VulkanTools] vktrace: VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT is not being handled consistently with regards to VkUpdateDescriptorSets()</li>
+<li>github #53 [VulkanTools] vktrace dies on Win7/32</li>
+<li>github #59 Swapchain validation layer complains about unspecified requirement</li>
+<li>github #60 Object tracker layer complains about <code>VK_NULL_HANDLE</code> given to <code>vkDestroy*</code>
+</li>
+<li>github #61 vktrace UnmapMemory of coherent memory should always serialize</li>
+<li>github #63 Trace captured on ARM platform cannot read by traceviewer32 on Ubuntu64</li>
+</ul>
+</article>
+</body>
+</html>
