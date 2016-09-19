@@ -1,0 +1,14 @@
+﻿  Main.cpp
+Main.cpp(266): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+Main.cpp(270): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+Main.cpp(350): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+Main.cpp(354): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+Main.cpp(524): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+Main.cpp(754): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+Main.cpp(797): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+  Generating code
+  3818 of 3826 functions (99.8%) were compiled, the rest were copied from previous compilation.
+    3633 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Reify.vcxproj -> C:\Users\Alexander\documents\visual studio 2015\Projects\Reify\x64\Release\Reify.exe

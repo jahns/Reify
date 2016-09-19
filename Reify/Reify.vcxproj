@@ -22,7 +22,7 @@
     <ProjectGuid>{38050A80-2E7B-4D39-90E7-E48A86C75088}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Reify</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -155,9 +155,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ReifyAppInfo.cpp" />
+    <ClCompile Include="ReifyInstanceCreateInfo.cpp" />
+    <ClCompile Include="ReifyLoop.cpp" />
+    <ClCompile Include="ReifyVKInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ReifyAppInfo.h" />
+    <ClInclude Include="ReifyDeleter.h" />
+    <ClInclude Include="ReifyInstanceCreateInfo.h" />
+    <ClInclude Include="ReifyLoop.h" />
+    <ClInclude Include="ReifyVKInstance.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
