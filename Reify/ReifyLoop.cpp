@@ -7,7 +7,7 @@ ReifyLoop::ReifyLoop()
 {
 }
 
-ReifyLoop::ReifyLoop(ReifyVKInstance vkInstance, GLFWwindow* window)
+ReifyLoop::ReifyLoop(ReifyVKInstance *vkInstance, GLFWwindow* window)
 {
 	this->vkInstance = vkInstance;
 	this->window = window;
@@ -25,7 +25,7 @@ void ReifyLoop::run()
 	renderLoop();
 }
 
-void ReifyLoop::setVkInstance(ReifyVKInstance vkInstance)
+void ReifyLoop::setVkInstance(ReifyVKInstance* vkInstance)
 {
 	this->vkInstance = vkInstance;
 }
@@ -34,6 +34,7 @@ void ReifyLoop::setWindow(GLFWwindow * window)
 {
 	this->window = window;
 }
+
 
 void ReifyLoop::renderLoop()
 {

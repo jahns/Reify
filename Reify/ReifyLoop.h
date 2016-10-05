@@ -7,16 +7,16 @@ class ReifyLoop
 {
 public:
 	ReifyLoop();
-	ReifyLoop(ReifyVKInstance vkInstance, GLFWwindow* window);
+	ReifyLoop(ReifyVKInstance *vkInstance, GLFWwindow* window);
 	~ReifyLoop();
 
 	void run();
-	void setVkInstance(ReifyVKInstance vkInstance);
+	void setVkInstance(ReifyVKInstance *vkInstance);
 	void setWindow(GLFWwindow* window);
 	
 private:
 	GLFWwindow* window;
-	ReifyVKInstance vkInstance;
+	ReifyVKInstance *vkInstance;
 	
 
 	void renderLoop();

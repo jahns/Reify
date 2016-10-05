@@ -159,6 +159,7 @@
     <ClCompile Include="ReifyInstanceCreateInfo.cpp" />
     <ClCompile Include="ReifyLoop.cpp" />
     <ClCompile Include="ReifyVKInstance.cpp" />
+    <ClCompile Include="ReifyVkValidationLayers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -169,6 +170,7 @@
     <ClInclude Include="ReifyInstanceCreateInfo.h" />
     <ClInclude Include="ReifyLoop.h" />
     <ClInclude Include="ReifyVKInstance.h" />
+    <ClInclude Include="ReifyVkValidationLayers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

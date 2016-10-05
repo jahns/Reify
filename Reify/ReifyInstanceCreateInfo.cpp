@@ -17,7 +17,7 @@ void ReifyInstanceCreateInfo::setSType(VkStructureType sType)
 	info.sType = sType;
 }
 
-void ReifyInstanceCreateInfo::setApplicationInfo(VkApplicationInfo *appInfo)
+void ReifyInstanceCreateInfo::setApplicationInfo(const VkApplicationInfo *appInfo)
 {
 	this->info.pApplicationInfo = appInfo;
 }

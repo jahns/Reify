@@ -35,34 +35,15 @@ ReifyAppInfo createAppInfo() {
 	return appInfo;
 }
 
-ReifyVKInstance createInstance(ReifyAppInfo& appInfo) {
-	ReifyVKInstance instance;
-	ReifyInstanceCreateInfo createInfo;
-	createInfo.setSType(VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO);
-	createInfo.setApplicationInfo(&appInfo.getAppInfo());
-
-
-	unsigned int glfwExtensionCount = 0;
-	const char** glfwExtensions;
-	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-	
-	createInfo.setEnabledExtensionCount(glfwExtensionCount);
-	createInfo.setEnalbedExtensionNames(glfwExtensions);
-	createInfo.setEnabledLayerCount(0);
-
-	instance.intializeVkInstance(createInfo);
-	return instance;
-
-}
-
 int main() {
 
 	glfwInit();
 	GLFWwindow* window = setUpWindow();
 	ReifyAppInfo appInfo = createAppInfo();
-	ReifyVKInstance instance = createInstance(appInfo);
+	ReifyVKInstance instance = ReifyVKInstance::createInstance(appInfo);
 	ReifyLoop loop;
 	loop.setWindow(window);
+	loop.setVkInstance(&instance);
 	loop.run();
 
 }

@@ -7,7 +7,7 @@ public:
 	~ReifyInstanceCreateInfo();
 
 	void setSType(VkStructureType sType);
-	void setApplicationInfo(VkApplicationInfo *appInfo);;
+	void setApplicationInfo(const VkApplicationInfo *appInfo);;
 	void setEnabledExtensionCount(int count);
 	void setEnalbedExtensionNames(const char* const* names);
 	void setEnabledLayerCount(int count);

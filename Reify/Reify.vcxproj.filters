@@ -22,21 +22,30 @@
     <Filter Include="VulkanTutorial\Header Files">
       <UniqueIdentifier>{48870e2d-21c0-449c-a023-f3b6b348da14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\VulkanInitialize">
+      <UniqueIdentifier>{4977fe26-5373-40b0-9e28-ad5d0062f363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VulkanIntialize">
+      <UniqueIdentifier>{1868a427-df9d-46e3-9435-f42793a06da9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReifyAppInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ReifyVKInstance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ReifyLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ReifyAppInfo.cpp">
+      <Filter>Source Files\VulkanIntialize</Filter>
+    </ClCompile>
     <ClCompile Include="ReifyInstanceCreateInfo.cpp">
+      <Filter>Source Files\VulkanIntialize</Filter>
+    </ClCompile>
+    <ClCompile Include="ReifyVKInstance.cpp">
+      <Filter>Source Files\VulkanIntialize</Filter>
+    </ClCompile>
+    <ClCompile Include="ReifyVkValidationLayers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,19 +53,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ReifyAppInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReifyVKInstance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReifyDeleter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ReifyLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ReifyAppInfo.h">
+      <Filter>Header Files\VulkanInitialize</Filter>
+    </ClInclude>
+    <ClInclude Include="ReifyDeleter.h">
+      <Filter>Header Files\VulkanInitialize</Filter>
+    </ClInclude>
     <ClInclude Include="ReifyInstanceCreateInfo.h">
+      <Filter>Header Files\VulkanInitialize</Filter>
+    </ClInclude>
+    <ClInclude Include="ReifyVKInstance.h">
+      <Filter>Header Files\VulkanInitialize</Filter>
+    </ClInclude>
+    <ClInclude Include="ReifyVkValidationLayers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
